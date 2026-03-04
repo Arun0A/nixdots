@@ -117,6 +117,7 @@
     vim
     fastfetch
     htop
+    unzip
 
     xorg.xinit
     xorg.xrandr
