@@ -63,6 +63,7 @@
   services.xserver = {
     enable = true;
 
+    xkbOptions = "ctrl:swapcaps";
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
 
