@@ -78,6 +78,27 @@
   };
 
   ################
+  # Fonts 
+  ################
+  fonts = {
+    enableDefaultPackages = true;
+
+    packages = with pkgs; [
+      dejavu_fonts
+      liberation_ttf
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      freefont_ttf
+      source-code-pro
+      fira-code
+      fira-code-symbols
+      ubuntu-classic
+    ];
+  };
+
+  ################
   # User
   ################
 
