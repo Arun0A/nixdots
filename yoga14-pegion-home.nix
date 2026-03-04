@@ -26,6 +26,7 @@
     blueman
     curl
     feh
+    tmux
 
     nerd-fonts.jetbrains-mono
   ];
@@ -73,6 +74,9 @@
       enable_audio_bell no
       scrollback_fill_enlarged_window yes
     '';
+    package = pkgs.kitty.overrideAttrs {
+      src = ./kitty;
+    };
   };
 
   ################
