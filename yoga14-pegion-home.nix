@@ -48,6 +48,9 @@
       set tabstop=4
       set shiftwidth=4
       set softtabstop=4
+      set clipboard=unnamedplus
+      set noerrorbells
+      set novisualbell
     '';
   };
 
@@ -58,6 +61,8 @@
     enable = true;
     extraConfig = ''
       confirm_os_window_close 0
+      map ctrl+backspace send_text all \x17
+      enable_audio_bell no
     '';
   };
 
