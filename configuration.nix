@@ -63,7 +63,7 @@
   services.xserver = {
     enable = true;
 
-    xkbOptions = "ctrl:swapcaps";
+    xkbOptions = "caps:ctrl_modifier";
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
 
@@ -107,6 +107,7 @@
     blueman
 
     cloudflare-warp
+    evtest
   ];
 
   ################
