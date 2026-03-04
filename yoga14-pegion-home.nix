@@ -23,6 +23,7 @@
     brightnessctl
     redshift
     xev
+    blueman
   ];
 
   ################
