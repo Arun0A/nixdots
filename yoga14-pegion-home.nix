@@ -24,7 +24,11 @@
     redshift
     xev
     blueman
+
+    nerd-fonts.jetbrains-mono
   ];
+  
+  fonts.fontconfig.enable = true;
 
   ################
   # Bash
