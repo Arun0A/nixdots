@@ -30,6 +30,8 @@
     };
   };
 
+  boot.kernelModules = [ "coretemp" ];
+
   ################
   # Networking
   ################
@@ -132,6 +134,7 @@
     evtest
 
     pulseaudio
+    lm_sensors
   ];
 
   ################
