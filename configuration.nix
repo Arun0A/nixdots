@@ -96,6 +96,7 @@
     xorg.xrandr
     xorg.xsetroot
     dmenu
+    xclip
 
     bluez
     blueman
