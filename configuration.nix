@@ -66,7 +66,7 @@
     enable = true;
 
     xkb.options = "caps:ctrl_modifier";
-    autoRepeatDelay = 200;
+    autoRepeatDelay = 350;
     autoRepeatInterval = 35;
 
     displayManager.startx.enable = true;
