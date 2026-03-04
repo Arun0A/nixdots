@@ -19,6 +19,9 @@
     ripgrep
     bat
     mpv
+    pamixer
+    brightnessctl
+    redshift
   ];
 
   ################
