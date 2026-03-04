@@ -11,7 +11,13 @@
   ################
 
   home.packages = with pkgs; [
-    hello
+    kitty
+    yazi
+    firefox
+    neovim
+    fzf
+    ripgrep
+    bat
   ];
 
   ################
@@ -25,6 +31,20 @@
       ll = "ls -la";
       ".." = "cd ..";
     };
+  };
+
+  ################
+  # vim 
+  ################
+  programs.vim = {
+    enable = true;
+    extraConfig = ''
+      set number
+      set expandtab
+      set tabstop=4
+      set shiftwidth=4
+      set softtabstop=4
+    '';
   };
 
   ################

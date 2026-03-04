@@ -92,15 +92,10 @@
     fastfetch
     htop
 
-    kitty
-    firefox
-
     xorg.xinit
     xorg.xrandr
     xorg.xsetroot
     dmenu
-
-    yazi
 
     bluez
     blueman
