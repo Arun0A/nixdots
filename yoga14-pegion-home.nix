@@ -24,6 +24,8 @@
     redshift
     xev
     blueman
+    curl
+    feh
 
     nerd-fonts.jetbrains-mono
   ];

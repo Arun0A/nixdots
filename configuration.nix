@@ -129,6 +129,8 @@
 
     cloudflare-warp
     evtest
+
+    pulseaudio
   ];
 
   ################
