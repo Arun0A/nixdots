@@ -63,7 +63,7 @@
   services.xserver = {
     enable = true;
 
-    xkbOptions = "caps:ctrl_modifier";
+    xkb.options = "caps:ctrl_modifier";
     autoRepeatDelay = 200;
     autoRepeatInterval = 35;
 
