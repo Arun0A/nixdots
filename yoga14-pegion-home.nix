@@ -18,6 +18,7 @@
     fzf
     ripgrep
     bat
+    mpv
   ];
 
   ################
@@ -53,7 +54,7 @@
 
   services.copyq = {
     enable = true;
-    systemdTarget = "x-session.target";
+    systemdTarget = "xsession.target";
   };
 
   ################
