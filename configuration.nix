@@ -39,7 +39,7 @@
   networking.hostName = "void";
   networking.networkmanager.enable = true;
 
-  networking.wireless.powerSave = false;
+  networking.networkmanager.wifi.powersave = false;
 
   services.cloudflare-warp.enable = true;
   # services.resolved.enable = false;
