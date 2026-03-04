@@ -37,6 +37,10 @@
   networking.hostName = "void";
   networking.networkmanager.enable = true;
 
+  services.cloudflare-warp.enable = true;
+  # services.resolved.enable = false;
+  # networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
   ################
   # Time
   ################
@@ -100,6 +104,8 @@
 
     bluez
     blueman
+
+    cloudflare-warp
   ];
 
   ################
@@ -118,5 +124,6 @@
   # System version
   ################
 
+  nixpkgs.config.allowUnfree = true;
   system.stateVersion = "25.11";
 }
