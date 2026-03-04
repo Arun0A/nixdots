@@ -109,10 +109,10 @@ static const Key keys[] = {
 //	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 1 && xset dpms force off") },
 	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
 	{ 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
-	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5; ~/suckless/dwm/vol_update.sh") },
-	{ 0, 			XF86XK_AudioRaiseVolume,   spawn, 	SHCMD("pamixer -i 5; ~/suckless/dwm/vol_update.sh") },
-	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/suckless/dwm/vol_update.sh" ) },
-	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/suckless/dwm/vol_update.sh" ) },
+	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5; ~/nix-dots/dwm/vol_update.sh") },
+	{ 0, 			XF86XK_AudioRaiseVolume,   spawn, 	SHCMD("pamixer -i 5; ~/nix-dots/dwm/vol_update.sh") },
+	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/nix-dots/dwm/vol_update.sh" ) },
+	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/nix-dots/dwm/vol_update.sh" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/%Y-%m-%d-%H%M%S.png") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)

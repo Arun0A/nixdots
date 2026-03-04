@@ -3,8 +3,8 @@
 while true; do
  
   # Battery with status
-  battery=$(cat /sys/class/power_supply/BAT0/capacity)%
-  bat_stat=`cat /sys/class/power_supply/BAT0/status`
+  battery=$(cat /sys/class/power_supply/BAT1/capacity)%
+  bat_stat=`cat /sys/class/power_supply/BAT1/status`
   if [[ "$bat_stat" == "Charging"  ]]; then
     battery+="*"
   elif [[ "$bat_stat" == "Full"  ]]; then
