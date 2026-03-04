@@ -39,6 +39,8 @@
   networking.hostName = "void";
   networking.networkmanager.enable = true;
 
+  networking.wireless.powerSave = false;
+
   services.cloudflare-warp.enable = true;
   # services.resolved.enable = false;
   # networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
