@@ -68,16 +68,14 @@
   ################
   programs.kitty = {
     enable = true;
-    extraConfig = ''
-      confirm_os_window_close 0
-      map ctrl+backspace send_text all \x17
-      enable_audio_bell no
-      scrollback_fill_enlarged_window yes
-    '';
-    package = pkgs.kitty.overrideAttrs {
-      src = ./kitty;
-    };
+    # extraConfig = ''
+    #   confirm_os_window_close 0
+    #   map ctrl+backspace send_text all \x17
+    #   enable_audio_bell no
+    #   scrollback_fill_enlarged_window yes
+    # '';
   };
+  home.file."kitty".source = ./kitty;
 
   ################
   # Clipboard manager
