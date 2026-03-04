@@ -22,6 +22,7 @@
     pamixer
     brightnessctl
     redshift
+    xev
   ];
 
   ################
@@ -63,6 +64,7 @@
       confirm_os_window_close 0
       map ctrl+backspace send_text all \x17
       enable_audio_bell no
+      scrollback_fill_enlarged_window yes
     '';
   };
 
