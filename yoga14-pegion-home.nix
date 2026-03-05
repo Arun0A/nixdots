@@ -76,7 +76,18 @@
     #   scrollback_fill_enlarged_window yes
     # '';
   };
-  home.file."kitty".source = ./kitty;
+  home.file.".config/kitty".source = ./kitty;
+  
+  ################
+  # tmux 
+  ################
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set-option -ga terminal-overrides ",xterm-256color:Tc"
+      set -g status-bg "#3f5c4c"
+    '';
+  };
 
   ################
   # Clipboard manager
