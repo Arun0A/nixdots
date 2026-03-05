@@ -27,6 +27,7 @@ while true; do
 
   # Network interface status (assuming you use wlan0 or enp*)
   net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://')
+  ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://') | awk '{print $1}')
   net_status=${net:-"NoNet"}
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
 
@@ -34,7 +35,7 @@ while true; do
   vol=$(cat /tmp/status_vol)
 
   # Write the base status to /tmp/status_base
-  echo "$net_status $ip | $mem_used | $cpu_temp | $battery | $datetime" >/tmp/status_base
-  xsetroot -name "$net_status $ip | $mem_used | $cpu_temp | $battery | $datetime"
+  echo "$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime" >/tmp/status_base
+  xsetroot -name "$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime"
   sleep 30
 done
