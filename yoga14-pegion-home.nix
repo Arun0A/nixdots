@@ -30,7 +30,6 @@
     scrot
     vivaldi
     google-chrome
-    aerc
 
     nerd-fonts.jetbrains-mono
   ];
