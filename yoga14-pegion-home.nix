@@ -28,6 +28,9 @@
     feh
     tmux
     scrot
+    vivaldi
+    google-chrome
+    aerc
 
     nerd-fonts.jetbrains-mono
   ];
@@ -104,4 +107,5 @@
   ################
 
   programs.home-manager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 }
