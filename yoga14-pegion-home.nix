@@ -27,6 +27,7 @@
     curl
     feh
     tmux
+    scrot
 
     nerd-fonts.jetbrains-mono
   ];
