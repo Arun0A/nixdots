@@ -31,6 +31,7 @@
     vivaldi
     google-chrome
     aerc
+    slock
 
     nerd-fonts.jetbrains-mono
   ];
