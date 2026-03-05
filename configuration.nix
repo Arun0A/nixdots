@@ -128,6 +128,7 @@
     xorg.xsetroot
     dmenu
     xclip
+    slock
 
     bluez
     blueman
@@ -138,6 +139,8 @@
     pulseaudio
     lm_sensors
   ];
+
+  programs.slock.enable = true;
 
   ################
   # Nix settings
