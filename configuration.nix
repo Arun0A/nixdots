@@ -138,6 +138,7 @@
 
     pulseaudio
     lm_sensors
+    pavucontrol
   ];
 
   programs.slock.enable = true;
