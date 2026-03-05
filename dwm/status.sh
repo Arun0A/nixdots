@@ -30,12 +30,13 @@ while true; do
   ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://') | awk '{print $1}')
   net_status=${net:-"NoNet"}
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
+  warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
 
   # Initialize vol
   vol=$(cat /tmp/status_vol)
 
   # Write the base status to /tmp/status_base
-  echo "$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime" >/tmp/status_base
-  xsetroot -name "$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime"
+  echo "$warp_status$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime" >/tmp/status_base
+  xsetroot -name "$warp_status$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime"
   sleep 30
 done
