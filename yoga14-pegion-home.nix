@@ -90,6 +90,7 @@
       set-option -ga terminal-overrides ",xterm-256color:Tc"
       set -g status-bg "#3f5c4c"
       set -g status-fg "#232424"
+      set -g mouse on
     '';
   };
 
