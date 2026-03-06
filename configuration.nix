@@ -64,6 +64,8 @@
   # X11 + DWM
   ################
 
+  services.libinput.enable = true;
+
   services.xserver = {
     enable = true;
 
@@ -120,7 +122,7 @@
 
   users.users.pegion = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "input" "video" "audio" ];
   };
 
   ################
@@ -142,6 +144,7 @@
     dmenu
     xclip
     picom
+    libinput
 
     bluez
     blueman

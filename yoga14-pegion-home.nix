@@ -31,6 +31,9 @@
     vivaldi
     google-chrome
 
+    fusuma
+    xdotool
+
     nerd-fonts.jetbrains-mono
   ];
   
@@ -100,6 +103,28 @@
   services.copyq = {
     enable = true;
     systemdTarget = "xsession.target";
+  };
+
+  ################
+  # fusuma
+  ################
+  services.fusuma = {
+    enable = true;
+    settings = {
+      device = {
+        name = "ELAN06FA";
+      };
+      gesture = {
+        pinch = {
+          "in" = {
+            command = "xdotool key ctrl+equal";
+          };
+          "out" = {
+            command = "xdotool key ctrl+minus";
+          };
+        };
+      };
+    };
   };
 
   ################
