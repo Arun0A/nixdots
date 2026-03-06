@@ -127,6 +127,7 @@
   users.users.pegion = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" "video" "audio" ];
+    shell = pkgs.zsh;
   };
 
   ################
@@ -140,6 +141,7 @@
     fastfetch
     htop
     unzip
+    zsh
 
     slock
     xorg.xinit
@@ -162,6 +164,8 @@
   ];
 
   programs.slock.enable = true;
+
+  programs.zsh.enable = true;
 
   ################
   # Nix settings
