@@ -84,6 +84,12 @@
     };
   };
 
+  services.picom = {
+    enable = true;
+    backend = "xrender";
+    vSync = true;
+  };
+
   ################
   # Fonts 
   ################
@@ -129,12 +135,13 @@
     htop
     unzip
 
+    slock
     xorg.xinit
     xorg.xrandr
     xorg.xsetroot
     dmenu
     xclip
-    slock
+    picom
 
     bluez
     blueman
