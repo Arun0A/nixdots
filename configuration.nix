@@ -79,9 +79,10 @@
       enable = true;
       package = pkgs.dwm.overrideAttrs {
         src = ./dwm;
-        # patches = [
-        #   ./dwm/patches/dwm-tab-v2b-20210810-7162335.diff
-        # ];
+        patches = [
+          # ./dwm/patches/dwm-tab-v2b-20210810-7162335.diff
+          ./dwm/patches/dwm-hide_vacant_tags-6.4.diff
+        ];
       };
     };
   };
