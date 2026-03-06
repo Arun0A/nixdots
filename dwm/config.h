@@ -78,8 +78,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_shark, "-nf", col_gray3, "-sb", col_mingreen, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *brupcmd[]  = { "brightnessctl", "set", "10%+", NULL};
-static const char *brdncmd[]  = { "brightnessctl", "set", "10%-", NULL};
+static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
+static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -109,7 +109,7 @@ static const Key keys[] = {
 	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 0.1 && xset dpms force off") },
 	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
 	{ 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
-	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5; ~/nix-dots/dwm/vol_update.sh") },
+	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5 --allow-boost; ~/nix-dots/dwm/vol_update.sh") },
 	{ 0, 			XF86XK_AudioRaiseVolume,   spawn, 	SHCMD("pamixer -i 5 --allow-boost; ~/nix-dots/dwm/vol_update.sh") },
 	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/nix-dots/dwm/vol_update.sh" ) },
 	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/nix-dots/dwm/vol_update.sh" ) },
