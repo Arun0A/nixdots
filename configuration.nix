@@ -23,6 +23,9 @@
       useOSProber = true;
       efiInstallAsRemovable = true;
 
+      theme = ./grub-themes/OldBIOS;
+      splashImage = null;
+
       extraEntries = ''
         menuentry "Reboot" { reboot }
         menuentry "Poweroff" { halt }
