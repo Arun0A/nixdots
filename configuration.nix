@@ -64,6 +64,13 @@
   services.blueman.enable = true;
 
   ################
+  # Virtualisation
+  ################
+
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+
+  ################
   # X11 + DWM
   ################
 
@@ -126,7 +133,7 @@
 
   users.users.pegion = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "video" "audio" ];
+    extraGroups = [ "wheel" "input" "video" "audio" "libvertd" "kvm" ];
     shell = pkgs.zsh;
   };
 
