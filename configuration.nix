@@ -69,6 +69,8 @@
 
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+  security.polkit.enable = true;
+  virtualisation.libvirtd.qemu.swtpm.enable = true;
 
   ################
   # X11 + DWM
@@ -168,6 +170,14 @@
     pulseaudio
     lm_sensors
     pavucontrol
+
+    virt-manager
+    qemu
+    virt-viewer
+    spice
+    spice-gtk
+    polkit_gnome
+
   ];
 
   programs.slock.enable = true;
