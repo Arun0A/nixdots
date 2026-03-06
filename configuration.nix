@@ -77,9 +77,9 @@
       enable = true;
       package = pkgs.dwm.overrideAttrs {
         src = ./dwm;
-        patches = [
-          ./dwm/patches/dwm-tab-v2b-20210810-7162335.diff
-        ];
+        # patches = [
+        #   ./dwm/patches/dwm-tab-v2b-20210810-7162335.diff
+        # ];
       };
     };
   };
@@ -102,6 +102,9 @@
       fira-code
       fira-code-symbols
       ubuntu-classic
+      corefonts
+      liberation_ttf
+      dejavu_fonts
     ];
   };
 
