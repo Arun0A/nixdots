@@ -1,5 +1,14 @@
 { config, pkgs, ... }:
-
+let
+  myaliases = {
+    ll = "ls -la";
+    ".." = "cd ..";
+    "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/nix-dots/#yoga14";
+    "hms" = "home-manager switch --flake /home/pegion/nix-dots";
+    "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
+    "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
+  };
+in
 {
   home.username = "pegion";
   home.homeDirectory = "/home/pegion";
@@ -46,14 +55,22 @@
   programs.bash = {
     enable = true;
 
-    shellAliases = {
-      ll = "ls -la";
-      ".." = "cd ..";
-      "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/nix-dots/#yoga14";
-      "hms" = "home-manager switch --flake /home/pegion/nix-dots";
-      "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
-      "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
+    shellAliases = myaliases;
+  };
+
+  ################
+  # Zsh
+  ################
+
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
     };
+    shellAliases = myaliases;
   };
 
   ################
