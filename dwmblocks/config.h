@@ -1,17 +1,11 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+static const Block blocks[] = {
+  /* icon  command                                   interval  signal */
+  { "",    "$HOME/.config/dwmblocks/scripts/volume",  0,        1 },
+  { "",    "$HOME/.config/dwmblocks/scripts/network", 10,       2 },
+  { "",    "$HOME/.config/dwmblocks/scripts/memory",  5,        3 },
+  { "",    "$HOME/.config/dwmblocks/scripts/cputemp", 5,        4 },
+  { "",    "sh -x $HOME/.config/dwmblocks/scripts/battery", 5,        5 },
+  { "",    "$HOME/.config/dwmblocks/scripts/datetime",1,        6 },
+};
 
-#define DELIMITER " | "
-#define MAX_BLOCK_OUTPUT_LENGTH 45
-#define CLICKABLE_BLOCKS 1
-#define LEADING_DELIMITER 1
-#define TRAILING_DELIMITER 0
-
-#define BLOCKS(X) \
-    X("", "~/.config/dwmblocks/scripts/volume", 0, 1) \
-    X("", "~/.config/dwmblocks/scripts/network", 10, 2) \
-    X("", "~/.config/dwmblocks/scripts/memory", 5, 3) \
-    X("", "~/.config/dwmblocks/scripts/cputemp", 5, 4) \
-    X("", "~/.config/dwmblocks/scripts/battery", 5, 5) \
-    X("", "~/.config/dwmblocks/scripts/datetime", 1, 6)
-#endif
+static char delim[] = " | ";

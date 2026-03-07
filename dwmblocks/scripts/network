@@ -1,8 +1,8 @@
 #!/bin/sh
 
-net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://')
-ssid=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)
+net=$(ip route get 1.1.1.1 2>/dev/null | awk '{print $5; exit}')
+ssid=$(nmcli -t -f active,ssid dev wifi | awk -F: '$1=="yes"{print $2}')
 
 ip=$(ip -4 addr show "$net" 2>/dev/null | awk '/inet / {print $2}' | cut -d/ -f1)
 
-printf "%s %s" "${ssid:-NoNet}" "$ip"
+printf "%s %s\n" "${ssid:-NoNet}" "$ip"
