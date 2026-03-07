@@ -151,6 +151,7 @@
     htop
     unzip
     zsh
+    localsend
 
     slock
     xorg.xinit
@@ -160,6 +161,8 @@
     xclip
     picom
     libinput
+    gcc
+    cmake
 
     bluez
     blueman
