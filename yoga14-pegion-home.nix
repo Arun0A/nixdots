@@ -53,6 +53,11 @@ in
   
   fonts.fontconfig.enable = true;
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
   ################
   # Bash
   ################

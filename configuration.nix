@@ -180,6 +180,9 @@
 
   ];
 
+  environment.variables.EDITOR = "vim";
+  environment.variables.VISUAL = "vim";
+
   programs.slock.enable = true;
 
   programs.zsh.enable = true;
