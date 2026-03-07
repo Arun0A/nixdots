@@ -162,6 +162,7 @@
     libinput
     gcc
     cmake
+    python314
 
     bluez
     blueman
