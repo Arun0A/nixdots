@@ -1,0 +1,13 @@
+#!/bin/sh
+
+bat="/sys/class/power_supply/BAT1"
+
+cap=$(cat $bat/capacity)
+stat=$(cat $bat/status)
+
+case "$stat" in
+    Charging|Full) printf "%s%%*" "$cap" ;;
+    "Not charging") printf "%s%%!" "$cap" ;;
+    Discharging) printf "%s%%" "$cap" ;;
+    *) printf "%s%%E" "$cap" ;;
+esac

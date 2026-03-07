@@ -20,13 +20,13 @@ let
       hash = "sha256-E3Jk+Cpcvo7/ePEdi09jInDB3JqLwN+ZHtutk3nmmhM=";
     };
 
-    nativeBuildInputs = [
-      pkgs.gnumake
-    ];
+    nativeBuildInputs = [ pkgs.gnumake ];
 
-    buildInputs = [
-      pkgs.xorg.libxcb
-    ];
+    buildInputs = [ pkgs.xorg.libxcb ];
+
+    postPatch = ''
+      cp ${./dwmblocks/config.h} config.h
+    '';
 
     makeFlags = [
       "LDFLAGS=-lxcb"
@@ -87,6 +87,30 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
+
+
+  ################
+  # dwmblocks
+  ################
+  home.file.".config/dwmblocks/config.h".source = ./dwmblocks/config.h;
+  
+  home.file.".config/dwmblocks/scripts/volume".source = ./dwmblocks/scripts/volume;
+  home.file.".config/dwmblocks/scripts/volume".executable = true;
+
+  home.file.".config/dwmblocks/scripts/network".source = ./dwmblocks/scripts/network;
+  home.file.".config/dwmblocks/scripts/network".executable = true;
+
+  home.file.".config/dwmblocks/scripts/memory".source = ./dwmblocks/scripts/memory;
+  home.file.".config/dwmblocks/scripts/memory".executable = true;
+  
+  home.file.".config/dwmblocks/scripts/cputemp".source = ./dwmblocks/scripts/cputemp;
+  home.file.".config/dwmblocks/scripts/cputemp".executable = true;
+  
+  home.file.".config/dwmblocks/scripts/battery".source = ./dwmblocks/scripts/battery;
+  home.file.".config/dwmblocks/scripts/battery".executable = true;
+  
+  home.file.".config/dwmblocks/scripts/datetime".source = ./dwmblocks/scripts/datetime;
+  home.file.".config/dwmblocks/scripts/datetime".executable = true;
 
   ################
   # Bash
