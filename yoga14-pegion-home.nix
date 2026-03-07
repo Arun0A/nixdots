@@ -39,6 +39,9 @@ in
     scrot
     vivaldi
     google-chrome
+    zoom-us
+    ffmpeg
+    qtox
 
     fusuma
     xdotool
