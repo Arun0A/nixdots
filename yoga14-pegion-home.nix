@@ -7,6 +7,7 @@ let
     "hms" = "home-manager switch --flake /home/pegion/nix-dots";
     "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
     "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
+    "br" = "broot";
   };
 in
 {
@@ -21,7 +22,7 @@ in
 
   home.packages = with pkgs; [
     kitty
-    yazi
+    broot
     firefox
     neovim
     fzf
@@ -39,9 +40,11 @@ in
     scrot
     vivaldi
     google-chrome
+    brave
     zoom-us
     ffmpeg
     qtox
+    
 
     fusuma
     xdotool
