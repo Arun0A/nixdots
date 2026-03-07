@@ -1,2 +1,2 @@
 #!/bin/sh
-date '+%a %d %b %I:%M %p'
+printf "%s\n" "$(date '+%a %d %b %I:%M %p')"
