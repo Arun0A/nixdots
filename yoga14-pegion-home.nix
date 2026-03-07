@@ -42,7 +42,7 @@ in
     zoom-us
     ffmpeg
     qtox
-    
+    localsend
 
     fusuma
     xdotool

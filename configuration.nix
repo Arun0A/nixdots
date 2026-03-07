@@ -151,7 +151,6 @@
     htop
     unzip
     zsh
-    localsend
 
     slock
     xorg.xinit
