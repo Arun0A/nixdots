@@ -8,6 +8,36 @@ let
     "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
     "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
   };
+
+  dwmblocks-async = pkgs.stdenv.mkDerivation {
+    pname = "dwmblocks-async";
+    version = "git";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "UtkarshVerma";
+      repo = "dwmblocks-async";
+      rev = "master";
+      hash = "sha256-E3Jk+Cpcvo7/ePEdi09jInDB3JqLwN+ZHtutk3nmmhM=";
+    };
+
+    nativeBuildInputs = [
+      pkgs.gnumake
+    ];
+
+    buildInputs = [
+      pkgs.xorg.libxcb
+    ];
+
+    makeFlags = [
+      "LDFLAGS=-lxcb"
+    ];
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp build/dwmblocks $out/bin/
+    '';
+  };
+
 in
 {
   home.username = "pegion";
@@ -46,6 +76,7 @@ in
 
     fusuma
     xdotool
+    dwmblocks-async
 
     nerd-fonts.jetbrains-mono
   ];
