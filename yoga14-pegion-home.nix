@@ -23,7 +23,6 @@ in
     kitty
     broot
     firefox
-    neovim
     fzf
     ripgrep
     bat
@@ -99,6 +98,17 @@ in
       set novisualbell
     '';
   };
+
+  ################
+  # neovim 
+  ################
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      nvim-colorizer-lua
+    ];
+  };
+  home.file.".config/nvim".source = ./nvim;
 
   ################
   # kitty 
