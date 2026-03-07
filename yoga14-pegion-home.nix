@@ -7,7 +7,6 @@ let
     "hms" = "home-manager switch --flake /home/pegion/nix-dots";
     "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
     "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
-    "br" = "broot";
   };
 in
 {
@@ -116,11 +115,22 @@ in
   programs.tmux = {
     enable = true;
     extraConfig = ''
-      set-option -ga terminal-overrides ",xterm-256color:Tc"
+      set -g terminal-overrides ",xterm-kitty:Tc"
       set -g status-bg "#3f5c4c"
       set -g status-fg "#232424"
       set -g mouse on
+      set -g default-terminal "tmux-256color"
     '';
+  };
+
+  ################
+  # broot 
+  ################
+
+  programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   ################
