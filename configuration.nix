@@ -216,77 +216,88 @@
   ################
   # Create systemd service
   systemd.services.logiops = {
-    description = "An unofficial userspace driver for HID++ Logitech devices";
+    description = "Logitech Configuration Daemon";
+    wantedBy = [ "graphical.target" ];
+    startLimitIntervalSec = 0;
+    after = [ "graphical.target" ];
     serviceConfig = {
       Type = "simple";
       ExecStart = "${pkgs.logiops}/bin/logid";
+      User = "root";
     };
   };
+
+  # Add a `udev` rule to restart `logiops` when the mouse is connected
+  # https://github.com/PixlOne/logiops/issues/239#issuecomment-1044122412
+  services.udev.extraRules = ''
+    ACTION=="change", SUBSYSTEM=="power_supply", ATTRS{manufacturer}=="Logitech", ATTRS{model_name}=="MX Anywhere 3S", RUN{program}="${pkgs.systemd}/bin/systemctl --no-block try-restart logiops.service"
+  '';
 
   # Configuration for logiops
   environment.etc."logid.cfg".text = ''
     devices: ({
-      name: "Wireless Mouse MX Anywhere 3S";
+      name: "MX Anywhere 3S";
+
       smartshift: {
-        on: false;
-        threshold: 12;
+        on: true; 
+        threshold: 255;
       };
+
       hiresscroll: {
-        hires: true;
+        hires: true; 
+        invert: false;
         target: false;
+        multiplier: 1.5;
       };
+
       dpi: 1200;
-      buttons: ({
-        cid: 0xc3;
-        action = {
-          type: "Gestures";
-          gestures: ({
-            direction: "Left";
-            mode: "OnRelease";
-            action = {
-              type = "Keypress";
-              keys: ["KEY_F15"];
-            };
-          }, {
-            direction: "Right";
-            mode: "OnRelease";
-            action = {
-              type = "Keypress";
-              keys: ["KEY_F16"];
-            };
-          }, {
-            direction: "Down";
-            mode: "OnRelease";
-            action = {
-              type: "Keypress";
-              keys: ["KEY_F17"];
-            };
-          }, {
-            direction: "Up";
-            mode: "OnRelease";
-            action = {
-              type: "Keypress";
-              keys: ["KEY_F18"];
-            };
-          }, {
-            direction: "None";
-            mode: "OnRelease";
-            action = {
-              type = "Keypress";
-              keys: ["KEY_PLAYPAUSE"];
-            };
-          });
-        };
-      }, {
-        cid: 0xc4;
-        action = {
-          type: "Keypress";
-          keys: ["KEY_F19"];
-        };
-      });
+
+      buttons: (
+
+        {
+          cid: 0x53; # BTN_SIDE (side_back)
+          action = {
+            type: "Keypress";
+            keys: ["KEY_LEFTCTRL", "KEY_V"];
+          };
+        },
+
+        {
+          cid: 0x56; # BTN_EXTRA (side_front)
+          action = {
+            type: "Keypress";
+            keys: ["KEY_SYSRQ"];
+          };
+        },
+
+        {
+          cid: 0xc4; # BTN_TOP (top_button)
+          action = {
+            type: "Keypress";
+            keys: ["KEY_DELETE"];
+          };
+        }
+
+        # {
+        #   cid: 0xd7;
+        #   action = {
+        #     type: "Keypress";
+        #     keys: [""];
+        #   };
+        # },
+
+        # {
+        #   cid: 0x52; # BTN_MIDDLE
+        #   action = {
+        #     type: "Keypress";
+        #     keys: [""];
+        #   };
+        # }
+
+      );
     });
   '';
-
+  
   ################
   # Nix settings
   ################
