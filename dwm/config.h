@@ -81,6 +81,8 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
 static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
 
+#include "movestack.c"
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -92,6 +94,8 @@ static const Key keys[] = {
 	{ SUPKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ SUPKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ SUPKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ SUPKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+	{ SUPKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ SUPKEY,                       XK_Return, zoom,           {0} },
 	{ SUPKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },

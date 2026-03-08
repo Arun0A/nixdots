@@ -113,6 +113,7 @@
         patches = [
           # ./dwm/patches/dwm-tab-v2b-20210810-7162335.diff
           ./dwm/patches/dwm-hide_vacant_tags-6.4.diff
+          # ./dwm/patches/dwm-movestack-20211115-a786211.diff # applied manually
         ];
       };
     };
