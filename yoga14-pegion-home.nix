@@ -43,6 +43,7 @@ in
     ffmpeg
     qtox
     localsend
+    zed-editor
 
     fusuma
     xdotool
