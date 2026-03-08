@@ -74,13 +74,20 @@ in
   ################
   # fmd-server 
   ################
+  environment.etc."fmd-server/config.yml".text = ''
+    DatabaseDir: "/var/lib/fmd-server/db"
+
+    PortSecure: -1
+    PortInsecure: 9090
+  '';
   systemd.services.fmd-server = {
     description = "Find My Device Server";
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStart = "${pkgsUnstable.fmd-server}/bin/fmd-server serve";
+      ExecStart = "${pkgsUnstable.fmd-server}/bin/fmd-server serve -c /etc/fmd-server/config.yml";
       Restart = "always";
+      StateDirectory = "fmd-server";
     };
   };
 
