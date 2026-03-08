@@ -58,7 +58,7 @@ in
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [ 3000 ];
+    allowedTCPPorts = [ 8443 ];
   };
 
   # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
@@ -77,8 +77,11 @@ in
   environment.etc."fmd-server/config.yml".text = ''
     DatabaseDir: "/var/lib/fmd-server/db"
 
-    PortSecure: -1
-    PortInsecure: 9090
+    PortSecure: 8443
+    PortInsecure: -1
+
+    ServerCrt: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.crt"
+    ServerKey: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.key"
   '';
   systemd.services.fmd-server = {
     description = "Find My Device Server";
