@@ -1,10 +1,7 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, nixpkgs-unstable, ... }:
 
 let
-  unstable = import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  }) { };
-
+  pkgsUnstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
 in
 {
   imports = [
@@ -61,6 +58,7 @@ in
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
     allowedUDPPorts = [ config.services.tailscale.port ];
+    allowedTCPPorts = [ 3000 ];
   };
 
   # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
@@ -81,7 +79,7 @@ in
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStart = "${unstable.fmd-server}/bin/fmd-server";
+      ExecStart = "${pkgsUnstable.fmd-server}/bin/fmd-server serve";
       Restart = "always";
     };
   };

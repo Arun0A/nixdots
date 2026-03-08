@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -10,7 +11,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
 
   let
     system = "x86_64-linux";
@@ -20,6 +21,10 @@
   {
     nixosConfigurations.yoga14 = nixpkgs.lib.nixosSystem {
       inherit system;
+
+      specialArgs = {
+        inherit nixpkgs-unstable;
+      };
 
       modules = [
         ./configuration.nix
