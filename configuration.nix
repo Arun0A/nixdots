@@ -46,7 +46,8 @@
 
   services.cloudflare-warp.enable = true;
   # services.resolved.enable = false;
-  # networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [ "100.100.100.100" "1.1.1.1" "1.0.0.1" ];
+  networking.search = [ "feist-arctic.ts.net" ];
 
   services.tailscale.enable = true;
   networking.nftables.enable = true;
