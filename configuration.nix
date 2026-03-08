@@ -1,5 +1,11 @@
 { config, pkgs, lib, ... }:
 
+let
+  unstable = import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+  }) { };
+
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -66,6 +72,19 @@
   # 3. Optimization: Prevent systemd from waiting for network online
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
+  
+  ################
+  # fmd-server 
+  ################
+  systemd.services.fmd-server = {
+    description = "Find My Device Server";
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${unstable.fmd-server}/bin/fmd-server";
+      Restart = "always";
+    };
+  };
 
   ################
   # Battery
