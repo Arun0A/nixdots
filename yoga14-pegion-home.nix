@@ -2,14 +2,45 @@
 let
   myaliases = {
     ll = "ls -la";
+
     ".." = "cd ..";
+    
     "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/nix-dots/#yoga14";
+
     "hms" = "home-manager switch --flake /home/pegion/nix-dots";
-    "purify-nix-btw" = "sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-1 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
-    "purify-nix-all" = "sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system && home-manager expire-generations \"-0 days\" && sudo nix-collect-garbage -d && sudo nix-store --optimise";
   };
+
 in
 {
+  programs.zsh.initContent = ''
+    purify-nix-btw() {
+      sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system
+      home-manager expire-generations -1days
+      sudo nix-collect-garbage -d
+      sudo nix-store --optimise
+    }
+
+    purify-nix-all() {
+      sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+      nix-env --delete-generations old
+      home-manager expire-generations 0days
+      rm -rf ~/.cache/nix
+      sudo nix-collect-garbage -d
+      sudo nix-store --optimise
+    }
+
+    purify-nix-nuclear() {
+      sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+      nix-env --delete-generations old
+      home-manager expire-generations 0days
+      sudo \'rm -rf /nix/var/nix/gcroots/per-user/*\'
+      rm -rf ~/.cache/nix ~/.cache/nix/eval-cache
+      sudo nix-collect-garbage -d
+      sudo nix-store --gc
+      sudo nix-store --optimise
+    }
+  '';
+
   home.username = "pegion";
   home.homeDirectory = "/home/pegion";
 
