@@ -110,7 +110,7 @@ static const Key keys[] = {
 	{ SUPKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ SUPKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ SUPKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 0.1 && xset dpms force off") },
+	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("xset dpms force off; slock") },
 	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
 	{ 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
 	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5 --allow-boost; ~/nix-dots/dwm/vol_update.sh") },
