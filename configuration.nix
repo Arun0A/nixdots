@@ -39,6 +39,11 @@ in
   boot.kernelModules = [ "coretemp" ];
 
   ################
+  # fprintd
+  ################
+  services.fprintd.enable = true;
+
+  ################
   # Networking
   ################
 
