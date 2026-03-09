@@ -26,8 +26,8 @@ while true; do
   mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
 
   # Network interface status (assuming you use wlan0 or enp*)
-  net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://')
-  ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://') | awk '{print $1}')
+  net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1)
+  ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1) | awk '{print $1}')
   net_status=${net:-"NoNet"}
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
   warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
