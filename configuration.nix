@@ -8,6 +8,8 @@ in
     ./hardware-configuration.nix
   ];
 
+  services.logind.settings.Login.HandlePowerKey = "suspend";
+
   ################
   # Bootloader
   ################
