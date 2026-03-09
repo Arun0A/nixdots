@@ -67,6 +67,7 @@ in
     feh
     tmux
     scrot
+    kdePackages.dolphin
     vivaldi
     google-chrome
     brave
