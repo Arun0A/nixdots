@@ -219,6 +219,7 @@ in
     htop
     unzip
     zsh
+    udisks2
 
     slock
     xorg.xinit
@@ -258,6 +259,8 @@ in
   programs.slock.enable = true;
 
   programs.zsh.enable = true;
+
+  services.udisks2.enable = true;
 
   ################
   # logiops
