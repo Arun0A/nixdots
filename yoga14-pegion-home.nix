@@ -8,6 +8,8 @@ let
     "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/nix-dots/#yoga14";
 
     "hms" = "home-manager switch --flake /home/pegion/nix-dots";
+
+    "icat" = "kitty +kitten icat";
   };
 
 in
