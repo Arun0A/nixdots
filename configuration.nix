@@ -201,6 +201,11 @@ in
   # User
   ################
 
+  home-manager.users.pegion = {
+    stateVersion = "25.11";
+    imports = [ ./yoga14-pegion-home.nix ];
+  };
+
   users.users.pegion = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" "video" "audio" "libvertd" "kvm" ];
