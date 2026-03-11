@@ -17,6 +17,8 @@ in
   boot.loader = {
     timeout = 10;
 
+    systemd-boot.enable = false;
+
     efi = {
       efiSysMountPoint = "/boot";
     };
