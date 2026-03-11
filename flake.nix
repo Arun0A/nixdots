@@ -29,12 +29,13 @@
       modules = [
         ./configuration.nix
         home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "hm-bak";
+          home-manager.users.pegion = import ./yoga14-pegion-home.nix;
+        }
       ];
     };
-    homeConfigurations.pegion = 
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./yoga14-pegion-home.nix ];
-      };
   };
 }
