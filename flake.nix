@@ -28,16 +28,13 @@
 
       modules = [
         ./configuration.nix
-	home-manager.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
       ];
     };
-
-    homeConfigurations.pegion =
+    homeConfigurations.pegion = 
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./yoga14-pegion-home.nix
-        ];
+        modules = [ ./yoga14-pegion-home.nix ];
       };
   };
 }

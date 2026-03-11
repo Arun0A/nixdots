@@ -5,9 +5,9 @@ let
 
     ".." = "cd ..";
     
-    "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/.nix-dots/#yoga14";
+    "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/.nixdots/#yoga14";
 
-    "hms" = "home-manager switch --flake /home/pegion/.nix-dots";
+    "hms" = "home-manager switch --flake /home/pegion/.nixdots";
 
     "icat" = "kitty +kitten icat";
   };
