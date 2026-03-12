@@ -17,13 +17,15 @@ while true; do
     battery+="E"
   fi
 
-  datetime=$(date '+%a %d %b %I:%M %p')
+  datetime=$(date '+%a %d %b %H:%M')
 
   # CPU temperature (assumes lm_sensors)
   cpu_temp=$(sensors | grep -m 1 'Package' | awk '{print $4}')
+  cpu_usage=$(awk '/^cpu / {usage=100-($5*100/($2+$3+$4+$5+$6+$7+$8)); printf "%.0f%%\n", usage}' /proc/stat)
 
   # Memory usage
-  mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}')
+  # mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}') # shows used/total
+  mem_used=$(free -h | awk '/^Mem:/ {print $3}')
 
   # Network interface status (assuming you use wlan0 or enp*)
   net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1)
@@ -36,7 +38,7 @@ while true; do
   vol=$(cat /tmp/status_vol)
 
   # Write the base status to /tmp/status_base
-  echo "$warp_status$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime" >/tmp/status_base
-  xsetroot -name "$warp_status$ssid $ip | $mem_used | $cpu_temp | $battery | $datetime"
+  echo "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime" >/tmp/status_base
+  xsetroot -name "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
   sleep 30
 done
