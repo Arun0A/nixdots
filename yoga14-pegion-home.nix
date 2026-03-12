@@ -77,8 +77,8 @@ in
     ffmpeg
     qtox
     localsend
-    zed-editor-fhs
     vscode.fhs
+    thunderbird
 
     fusuma
     xdotool

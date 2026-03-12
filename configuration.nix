@@ -171,7 +171,7 @@ in
 
   services.picom = {
     enable = true;
-    backend = "glx";
+    backend = "xrender";
     vSync = true;
   };
 
