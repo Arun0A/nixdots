@@ -80,6 +80,8 @@ in
     localsend
     vscode.fhs
     thunderbird
+    discord
+    sioyek
 
     fusuma
     xdotool
