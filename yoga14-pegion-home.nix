@@ -200,6 +200,11 @@ in
   };
 
   ################
+  # picom 
+  ################
+  home.file.".config/picom/picom.conf".source = ./picom/picom.conf;
+
+  ################
   # broot 
   ################
 

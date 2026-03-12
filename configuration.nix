@@ -1,7 +1,7 @@
 { config, pkgs, lib, nixpkgs-unstable, ... }:
 
 let
-  pkgsUnstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
+  pkgsUnstable = nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   imports = [
@@ -167,12 +167,6 @@ in
         ];
       };
     };
-  };
-
-  services.picom = {
-    enable = true;
-    backend = "xrender";
-    vSync = true;
   };
 
   ################
