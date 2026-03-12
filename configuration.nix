@@ -313,7 +313,7 @@ in
           cid: 0x53; # BTN_SIDE (side_back)
           action = {
             type: "Keypress";
-            keys: ["KEY_LEFTCTRL", "KEY_V"];
+            keys: ["KEY_LEFTMETA"];
           };
         },
 
