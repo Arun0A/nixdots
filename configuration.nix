@@ -216,6 +216,7 @@ in
     fastfetch
     htop
     unzip
+    p7zip
     zsh
     udisks2
 
