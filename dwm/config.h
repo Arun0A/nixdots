@@ -32,6 +32,7 @@ static const char *colors[][3]      = {
 */
 	[SchemeNorm] = { col_gray3, col_shark, 	   col_shark     },
 	[SchemeSel]  = { col_gray4, col_mingreen,  col_mingreen  },
+	[SchemeHid]  = { col_mingreen, col_shark,  col_mingreen  },
 };
 
 /* tagging */
@@ -88,14 +89,16 @@ static const Key keys[] = {
 	{ SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ SUPKEY,                       XK_b,      togglebar,      {0} },
-	{ SUPKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ SUPKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ SUPKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
+	{ SUPKEY,                       XK_k,      focusstackvis,  {.i = -1 } },
+	{ SUPKEY|ShiftMask,             XK_j,      focusstackhid,  {.i = +1 } },
+	{ SUPKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = -1 } },
 	{ SUPKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ SUPKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ SUPKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ SUPKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ SUPKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-	{ SUPKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+	{ SUPKEY|ControlMask,           XK_j,      movestack,      {.i = +1 } },
+	{ SUPKEY|ControlMask,           XK_k,      movestack,      {.i = -1 } },
 	{ SUPKEY,                       XK_Return, zoom,           {0} },
 	{ SUPKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -110,6 +113,9 @@ static const Key keys[] = {
 	{ SUPKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ SUPKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ SUPKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ SUPKEY,                       XK_s,      show,           {0} },
+	{ SUPKEY|ShiftMask,             XK_s,      showall,        {0} },
+	{ SUPKEY|ShiftMask,             XK_h,      hide,           {0} },
 	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("xset dpms force off; slock") },
 	{ SUPKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock & systemctl suspend") },
 	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
@@ -140,6 +146,7 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         SUPKEY,         Button1,        movemouse,      {0} },
