@@ -70,6 +70,7 @@ in
     tmux
     scrot
     kdePackages.dolphin
+    kdePackages.kio-admin
     vivaldi
     google-chrome
     brave
