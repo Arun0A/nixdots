@@ -82,6 +82,8 @@ in
     thunderbird
     discord
     sioyek
+    qrcp
+    yazi
 
     fusuma
     xdotool
