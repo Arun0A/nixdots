@@ -235,6 +235,8 @@ in
     bluez
     blueman
     logiops
+    touchegg
+    input-remapper
 
     cloudflare-warp
     evtest
@@ -260,6 +262,8 @@ in
   programs.zsh.enable = true;
 
   services.udisks2.enable = true;
+
+  services.input-remapper.enable = true;
 
   ################
   # logiops
