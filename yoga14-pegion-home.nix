@@ -85,6 +85,8 @@ in
     qrcp
     yazi
     qimgv
+    w3m
+    libreoffice
 
     fusuma
     xdotool
