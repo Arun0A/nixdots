@@ -84,6 +84,7 @@ in
     sioyek
     qrcp
     yazi
+    qimgv
 
     fusuma
     xdotool
