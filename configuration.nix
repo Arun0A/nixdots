@@ -146,6 +146,7 @@ in
   ################
 
   services.libinput.enable = true;
+  services.touchegg.enable = true;
 
   services.xserver = {
     enable = true;
@@ -235,7 +236,6 @@ in
     bluez
     blueman
     logiops
-    touchegg
 
     cloudflare-warp
     evtest
@@ -261,8 +261,6 @@ in
   programs.zsh.enable = true;
 
   services.udisks2.enable = true;
-
-  services.touchegg.enable = true;
 
   ################
   # logiops

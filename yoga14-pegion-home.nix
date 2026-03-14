@@ -85,12 +85,11 @@ in
     qrcp
     yazi
     qimgv
-    w3m
     libreoffice
 
-    fusuma
     xdotool
     dwmblocks
+    touchegg
 
     nerd-fonts.jetbrains-mono
   ];
@@ -232,26 +231,9 @@ in
   };
 
   ################
-  # fusuma
+  # touchegg 
   ################
-  services.fusuma = {
-    enable = true;
-    settings = {
-      device = {
-        name = "ELAN06FA";
-      };
-      gesture = {
-        pinch = {
-          "in" = {
-            command = "xdotool key ctrl+equal";
-          };
-          "out" = {
-            command = "xdotool key ctrl+minus";
-          };
-        };
-      };
-    };
-  };
+  home.file.".config/touchegg/touchegg.conf".source = ./touchegg/touchegg.conf;
 
   ################
   # Cursor
