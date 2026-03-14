@@ -10,6 +10,9 @@ let
     "hms" = "home-manager switch --flake /home/pegion/.nixdots";
 
     "icat" = "kitty +kitten icat";
+
+    "cd" = "z"; 
+    "cdi" = "zi";
   };
 
 in
@@ -57,6 +60,7 @@ in
   home.packages = with pkgs; [
     kitty
     broot
+    zoxide
     firefox
     fzf
     ripgrep
@@ -218,6 +222,16 @@ in
   ################
 
   programs.broot = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
+  ################
+  # zoxide 
+  ################
+
+  programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
