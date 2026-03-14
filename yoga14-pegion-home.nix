@@ -48,6 +48,8 @@ in
 
   home.stateVersion = "25.11";
 
+  home.file.".xinitrc".source = ./x/.xinitrc;
+
   ################
   # Packages
   ################
