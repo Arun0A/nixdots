@@ -236,7 +236,6 @@ in
     blueman
     logiops
     touchegg
-    input-remapper
 
     cloudflare-warp
     evtest
@@ -263,7 +262,7 @@ in
 
   services.udisks2.enable = true;
 
-  services.input-remapper.enable = true;
+  services.touchegg.enable = true;
 
   ################
   # logiops
