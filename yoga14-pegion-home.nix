@@ -92,6 +92,7 @@ in
     yazi
     qimgv
     libreoffice
+    appimage-run
 
     xdotool
     dwmblocks
