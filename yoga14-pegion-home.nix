@@ -93,6 +93,7 @@ in
     qimgv
     libreoffice
     appimage-run
+    yt-dlp
 
     xdotool
     dwmblocks
