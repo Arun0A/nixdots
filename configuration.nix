@@ -52,7 +52,7 @@ in
   networking.networkmanager.wifi.powersave = false;
 
   services.cloudflare-warp.enable = true;
-  # services.resolved.enable = false;
+  services.resolved.enable = true;
   networking.nameservers = [ "100.100.100.100" "1.1.1.1" "1.0.0.1" ];
   networking.search = [ "feist-arctic.ts.net" ];
 
