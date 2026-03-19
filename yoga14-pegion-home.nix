@@ -94,6 +94,7 @@ in
     libreoffice
     appimage-run
     yt-dlp
+    blobdrop
 
     xdotool
     dwmblocks
