@@ -38,7 +38,7 @@ in
       sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
       nix-env --delete-generations old
       home-manager expire-generations 0days
-      sudo \'rm -rf /nix/var/nix/gcroots/per-user/*\'
+      sudo find /nix/var/nix/gcroots/per-user -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
       rm -rf ~/.cache/nix ~/.cache/nix/eval-cache
       sudo nix-collect-garbage -d
       sudo nix-store --gc
