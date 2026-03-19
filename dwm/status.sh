@@ -21,7 +21,30 @@ while true; do
 
   # CPU temperature (assumes lm_sensors)
   cpu_temp=$(sensors | grep -m 1 'Package' | awk '{print $4}')
-  cpu_usage=$(awk '/^cpu / {usage=100-($5*100/($2+$3+$4+$5+$6+$7+$8)); printf "%.0f%%\n", usage}' /proc/stat)
+  cpu_fields=$(awk '/^cpu / {print $2" "$3" "$4" "$5" "$6" "$7" "$8" "$9; exit}' /proc/stat)
+  set -- $cpu_fields
+  cpu_user=$1
+  cpu_nice=$2
+  cpu_system=$3
+  cpu_idle=$4
+  cpu_iowait=$5
+  cpu_irq=$6
+  cpu_softirq=$7
+  cpu_steal=$8
+  cpu_idle_all=$((cpu_idle + cpu_iowait))
+  cpu_total=$((cpu_user + cpu_nice + cpu_system + cpu_idle + cpu_iowait + cpu_irq + cpu_softirq + cpu_steal))
+
+  cpu_usage="0%"
+  if [ -r /tmp/status_cpu_prev ]; then
+    read -r prev_idle prev_total < /tmp/status_cpu_prev
+    totald=$((cpu_total - prev_total))
+    idled=$((cpu_idle_all - prev_idle))
+    if [ "$totald" -gt 0 ]; then
+      usage=$((100 * (totald - idled) / totald))
+      cpu_usage="${usage}%"
+    fi
+  fi
+  echo "$cpu_idle_all $cpu_total" > /tmp/status_cpu_prev
 
   # Memory usage
   # mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}') # shows used/total
