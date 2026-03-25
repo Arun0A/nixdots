@@ -95,7 +95,7 @@ in
     appimage-run
     yt-dlp
     blobdrop
-    chafa
+    croc
 
     xdotool
     dwmblocks
