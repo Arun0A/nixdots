@@ -217,6 +217,8 @@ in
       set -g status-fg "#232424"
       set -g mouse on
       set -g default-terminal "tmux-256color"
+      bind '"' split-window -v -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
     '';
   };
 
