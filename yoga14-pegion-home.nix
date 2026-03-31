@@ -59,6 +59,7 @@ in
 
   home.packages = with pkgs; [
     kitty
+    bc
     broot
     zoxide
     firefox
