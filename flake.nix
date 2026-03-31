@@ -28,6 +28,7 @@
 
       modules = [
         ./configuration.nix
+        ./hosts/yoga14.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

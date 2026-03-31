@@ -127,6 +127,10 @@ static const Key keys[] = {
 	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/.nixdots/dwm/vol_update.sh" ) },
 	/* { 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
 	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
+	/* Lenovo IdeaPad extra buttons, remapped via udev hwdb to F13/F14/F15. */
+	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("playerctl play-pause" ) },
+	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("playerctl previous" ) },
+	{ 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl next" ) },
 	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
 	TAGKEYS(                        XK_F1,                      0)
@@ -158,4 +162,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            SUPKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            SUPKEY,         Button3,        toggletag,      {0} },
 };
-
