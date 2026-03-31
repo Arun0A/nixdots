@@ -104,6 +104,7 @@ in
     xdotool
     dwmblocks
     touchegg
+    playerctl
 
     nerd-fonts.jetbrains-mono
   ];

@@ -127,6 +127,7 @@ static const Key keys[] = {
 	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/.nixdots/dwm/vol_update.sh" ) },
 	/* { 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
 	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
+	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
 	TAGKEYS(                        XK_F1,                      0)
 	TAGKEYS(                        XK_F2,                      1)
