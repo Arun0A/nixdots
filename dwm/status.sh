@@ -57,11 +57,26 @@ while true; do
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
   warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
 
+  if playerctl status 2>/dev/null | grep -q "^Playing$"; then
+    mus=$(playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
+    if [ -z "$mus" ]; then
+      mus=$(playerctl metadata --format '{{title}}' 2>/dev/null)
+    fi
+    echo "$mus" >/tmp/status_mus
+  else
+    rm -f /tmp/status_mus
+  fi
+
   # Initialize vol
   vol=$(cat /tmp/status_vol)
+  mus=$(cat /tmp/status_mus 2>/dev/null || echo "")
 
   # Write the base status to /tmp/status_base
   echo "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime" >/tmp/status_base
-  xsetroot -name "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+  if [ -n "$mus" ]; then
+    xsetroot -name "${mus} | $warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+  else
+    xsetroot -name "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+  fi
   sleep 30
 done

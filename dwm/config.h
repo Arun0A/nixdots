@@ -127,11 +127,11 @@ static const Key keys[] = {
 	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/.nixdots/dwm/vol_update.sh" ) },
 	/* { 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
 	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
-	/* Lenovo IdeaPad extra buttons, remapped via udev hwdb to F13/F14/F15. */
-	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("playerctl play-pause" ) },
-	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("playerctl previous" ) },
-	{ 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl next" ) },
-	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause" ) },
+	/* Lenovo ThinkBook extra buttons, remapped via udev hwdb to F13/F14/F15. */
+	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("playerctl previous; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("playerctl next; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
 	TAGKEYS(                        XK_F1,                      0)
 	TAGKEYS(                        XK_F2,                      1)
