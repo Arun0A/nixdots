@@ -1904,7 +1904,15 @@ tile(Monitor *m)
 void
 togglebar(const Arg *arg)
 {
-	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
+	if (hidebarforalltags) {
+		unsigned int i;
+
+		selmon->showbar = !selmon->showbar;
+		for (i = 0; i <= LENGTH(tags); i++)
+			selmon->pertag->showbars[i] = selmon->showbar;
+	} else {
+		selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
+	}
 	updatebarpos(selmon);
 	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
 	arrange(selmon);
