@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 let
   myaliases = {
-    ll = "ls -la";
+    ll = "ls -latr";
+    l = "ls -ltr";
+    
+    yy = "yazi";
 
     ".." = "cd ..";
     
