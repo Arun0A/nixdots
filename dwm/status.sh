@@ -58,10 +58,18 @@ while true; do
   warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
 
   if playerctl status 2>/dev/null | grep -q "^Playing$"; then
-    mus=$(playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
+    mus=$(playerctl metadata --format '{{title}} - {{artist}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
+
     if [ -z "$mus" ]; then
       mus=$(playerctl metadata --format '{{title}}' 2>/dev/null)
     fi
+
+    maxlen=40
+
+    if [ ${#mus} -gt $maxlen ]; then
+      mus="${mus:0:$maxlen}..."
+    fi
+
     echo "$mus" >/tmp/status_mus
   else
     rm -f /tmp/status_mus
