@@ -205,7 +205,7 @@ in
 
   users.users.pegion = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "video" "audio" "libvertd" "kvm" ];
+    extraGroups = [ "wheel" "input" "video" "audio" "libvertd" "kvm" "dialout" ];
     shell = pkgs.zsh;
   };
 
