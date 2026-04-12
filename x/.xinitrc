@@ -1,5 +1,5 @@
 pulseaudio --start &
-feh --no-fehbg --bg-fill ~/Pictures/walls/wall5.png &
+~/.fehbg
 # xset b off
 picom -b --backend glx &
 # blueman-applet &
