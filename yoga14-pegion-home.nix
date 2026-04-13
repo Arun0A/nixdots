@@ -218,8 +218,12 @@ in
     enable = true;
     extraConfig = ''
       set -g terminal-overrides ",xterm-kitty:Tc"
-      set -g status-bg "#3f5c4c"
+
+      # set -g status-bg "#3f5c4c"
+      set -g status-bg "#9c9c9c"
+      # set -g status-fg "#232424"
       set -g status-fg "#232424"
+
       set -g mouse on
       set -g default-terminal "tmux-256color"
       bind '"' split-window -v -c "#{pane_current_path}"
