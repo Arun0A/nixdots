@@ -10,4 +10,9 @@ xinput set-prop 16 349 0 & # Disable MXA3S High-Res Scroll
 redshift -O 5000
 ~/.nixdots/dwm/status.sh &
 export XDG_SESSION_TYPE=x11
-exec dwm
+# exec dwm
+while true; do
+    # dwm 2> ~/.dwm.log
+    dwm >/dev/null 2>&1
+    [ $? -ne 0 ] && break
+done
