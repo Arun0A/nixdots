@@ -101,7 +101,7 @@ static const Key keys[] = {
 	{ SUPKEY,                       XK_s,      show,           {0} },
 	{ SUPKEY|ShiftMask,             XK_s,      showall,        {0} },
 	{ SUPKEY|ShiftMask,             XK_h,      hide,           {0} },
-	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("xset dpms force off; slock") },
+	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 1; xset dpms force off") },
 	{ SUPKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock & systemctl suspend") },
 	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
 	{ 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
