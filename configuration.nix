@@ -14,6 +14,8 @@ in
   # Bootloader
   ################
 
+  boot.kernelParams = [ "quiet" "log-level=3" ];
+
   boot.loader = {
     timeout = 10;
 
