@@ -89,6 +89,7 @@ in
     qtox
     localsend
     vscode.fhs
+    emacs
     thunderbird
     discord
     sioyek
