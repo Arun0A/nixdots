@@ -100,6 +100,7 @@ static const Key keys[] = {
 	{ SUPKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ SUPKEY,                       XK_s,      show,           {0} },
 	{ SUPKEY|ShiftMask,             XK_s,      showall,        {0} },
+	{ SUPKEY|ControlMask,           XK_s,      togglesticky,   {0} },
 	{ SUPKEY|ShiftMask,             XK_h,      hide,           {0} },
 	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 1; xset dpms force off") },
 	{ SUPKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock & systemctl suspend") },
