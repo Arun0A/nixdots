@@ -105,7 +105,6 @@ in
       latexmk
       scheme-medium
     ]))
-    obs-studio
 
     xdotool
     dwmblocks
@@ -283,6 +282,17 @@ in
 
     gtk.enable = true;
     x11.enable = true;
+  };
+
+  ################
+  # OBS-Studio
+  ################
+  
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
   };
 
   ################

@@ -243,6 +243,8 @@ in
     bluez
     blueman
     logiops
+    obs-studio
+    droidcam
 
     cloudflare-warp
     evtest
@@ -268,6 +270,14 @@ in
   programs.zsh.enable = true;
 
   services.udisks2.enable = true;
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      droidcam-obs
+    ];
+  };
 
   ################
   # logiops
