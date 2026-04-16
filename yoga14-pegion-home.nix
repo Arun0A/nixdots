@@ -105,6 +105,7 @@ in
       latexmk
       scheme-medium
     ]))
+    obs-studio
 
     xdotool
     dwmblocks
