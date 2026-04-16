@@ -14,7 +14,20 @@ in
   # Bootloader
   ################
 
-  boot.kernelParams = [ "quiet" "log-level=3" ];
+  boot.kernelParams = [
+    "quiet"
+    "log-level=3"
+    "v4l2loopback.devices=2"
+    "v4l2loopback.video_nr=1,2"
+    "v4l2loopback.card_label=DroidCam,OBSCam"
+    "v4l2loopback.exclusive_caps=1"
+  ];
+
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=2 video_nr=1,2 \
+      card_label="DroidCam","OBSCam" \
+      exclusive_caps=1
+  '';
 
   boot.loader = {
     timeout = 10;
@@ -47,12 +60,6 @@ in
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
-
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=2 video_nr=1,2 \
-      card_label="DroidCam","OBS Cam" \
-      exclusive_caps=1
-  '';
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = true;
@@ -133,6 +140,20 @@ in
       };
     };
   };
+
+  ################
+  # Pipewire
+  ################
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+
+    wireplumber.enable = true;
+  };
+
+  security.rtkit.enable = true;
 
   ################
   # Time
@@ -263,6 +284,7 @@ in
     lm_sensors
     pavucontrol
     v4l-utils
+    pipewire
 
     virt-manager
     qemu
