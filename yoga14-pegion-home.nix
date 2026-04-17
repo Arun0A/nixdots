@@ -105,6 +105,7 @@ in
       latexmk
       scheme-medium
     ]))
+    qbittorrent
 
     xdotool
     dwmblocks

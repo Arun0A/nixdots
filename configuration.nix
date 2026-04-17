@@ -293,11 +293,12 @@ in
     spice-gtk
     polkit_gnome
 
+    wineWowPackages.stable
+    winetricks
     mangohud
     protonup-qt
     lutris
     bottles
-    heroic
 
   ];
 
@@ -421,10 +422,6 @@ in
   # Gaming
   ################
   
-  hardware.opengl = {
-    enable = true;
-  };
-
   hardware.graphics.enable = true; 
 
   programs.steam.enable = true;
