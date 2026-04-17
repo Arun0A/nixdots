@@ -10,13 +10,21 @@ in
 
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
+  # tty greeting
+  services.getty.greetingLine = "";
+  # help line
+  environment.etc."issue".text = "";
+
+
   ################
   # Bootloader
   ################
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   boot.kernelParams = [
     "quiet"
-    "log-level=3"
+    "rd.udev.log_level=3"
     "v4l2loopback.devices=2"
     "v4l2loopback.video_nr=1,2"
     "v4l2loopback.card_label=DroidCam,OBSCam"
@@ -98,9 +106,9 @@ in
   # 3. Optimization: Prevent systemd from waiting for network online
   systemd.network.wait-online.enable = false;
   boot.initrd.systemd.network.wait-online.enable = false;
-  
+
   ################
-  # fmd-server 
+  # fmd-server
   ################
   environment.etc."fmd-server/config.yml".text = ''
     DatabaseDir: "/var/lib/fmd-server/db"
@@ -209,7 +217,7 @@ in
   };
 
   ################
-  # Fonts 
+  # Fonts
   ################
   fonts = {
     enableDefaultPackages = true;
@@ -347,12 +355,12 @@ in
       name: "MX Anywhere 3S";
 
       smartshift: {
-        on: true; 
+        on: true;
         threshold: 255;
       };
 
       hiresscroll: {
-        hires: true; 
+        hires: true;
         invert: false;
         target: false;
         multiplier: 1.5;
@@ -405,7 +413,7 @@ in
       );
     });
   '';
-  
+
   ################
   # Nix settings
   ################
@@ -421,8 +429,8 @@ in
   ################
   # Gaming
   ################
-  
-  hardware.graphics.enable = true; 
+
+  hardware.graphics.enable = true;
 
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
