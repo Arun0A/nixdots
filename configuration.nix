@@ -293,6 +293,12 @@ in
     spice-gtk
     polkit_gnome
 
+    mangohud
+    protonup-qt
+    lutris
+    bottles
+    heroic
+
   ];
 
   environment.variables.EDITOR = "vim";
@@ -410,6 +416,20 @@ in
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  ################
+  # Gaming
+  ################
+  
+  hardware.opengl = {
+    enable = true;
+  };
+
+  hardware.graphics.enable = true; 
+
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
 
   ################
   # System version
