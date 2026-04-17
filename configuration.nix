@@ -13,7 +13,10 @@ in
   # tty greeting
   services.getty.greetingLine = "";
   # help line
-  environment.etc."issue".text = "";
+  environment.etc."issue".text = ''<< If you are reading this, it is probably not your device. Return it to the OWNER : Arun Bhattacharya (arun0a_in@hotmail.com) >>
+\d | \t | \l
+
+  '';
 
 
   ################
