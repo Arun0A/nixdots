@@ -24,12 +24,17 @@ in
 
   boot.kernelParams = [
     "quiet"
+    "loglevel=0"
+    "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
+    "udev.log_priority=3"
     "v4l2loopback.devices=2"
     "v4l2loopback.video_nr=1,2"
     "v4l2loopback.card_label=DroidCam,OBSCam"
     "v4l2loopback.exclusive_caps=1"
   ];
+  boot.consoleLogLevel = lib.mkForce 0;
+  boot.initrd.verbose = true;
 
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=2 video_nr=1,2 \
