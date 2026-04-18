@@ -106,6 +106,7 @@ in
       scheme-medium
     ]))
     qbittorrent
+    krita
 
     xdotool
     dwmblocks
