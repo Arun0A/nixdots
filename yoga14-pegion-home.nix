@@ -107,6 +107,8 @@ in
     ]))
     qbittorrent
     krita
+    kdePackages.kdenlive
+    audacity
 
     xdotool
     dwmblocks
