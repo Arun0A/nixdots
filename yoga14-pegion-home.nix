@@ -61,6 +61,8 @@ in
   ################
 
   home.packages = with pkgs; [
+    net-tools
+    lsof
     kitty
     bc
     broot
