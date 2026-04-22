@@ -108,6 +108,7 @@ in
       scheme-medium
     ]))
     qbittorrent
+    nicotine-plus
     krita
     kdePackages.kdenlive
     audacity
