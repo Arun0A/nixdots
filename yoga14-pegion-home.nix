@@ -112,6 +112,7 @@ in
     krita
     kdePackages.kdenlive
     audacity
+    audacious
 
     xdotool
     dwmblocks
