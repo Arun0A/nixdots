@@ -121,7 +121,7 @@ static const Key keys[] = {
 	/* Lenovo ThinkBook extra buttons, remapped via udev hwdb to F13/F14/F15. */
 	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("playerctl previous; ~/.nixdots/dwm/mus_update.sh" ) },
 	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("playerctl next; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+	/* { 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
 	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
 	TAGKEYS(                        XK_F1,                      0)
