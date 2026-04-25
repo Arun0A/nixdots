@@ -118,6 +118,7 @@ in
     dwmblocks
     touchegg
     playerctl
+    xmodmap
 
     nerd-fonts.jetbrains-mono
   ];
