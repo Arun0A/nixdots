@@ -10,8 +10,8 @@ vim.o.number = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.hlsearch = false
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
 vim.o.showmode = false
 vim.o.termguicolors = true
 vim.o.updatetime = 250
@@ -94,7 +94,7 @@ MiniDeps.add({
 -- ==                         PLUGIN CONFIGURATION                         == --
 -- ========================================================================== --
 
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme('retrobox')
 
 -- See :help MiniIcons.config
 -- Change style to 'glyph' if you have a font with fancy icons
