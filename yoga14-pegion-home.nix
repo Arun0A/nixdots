@@ -91,6 +91,7 @@ in
     qtox
     localsend
     vscode.fhs
+    antigravity-fhs
     emacs
     thunderbird
     discord
