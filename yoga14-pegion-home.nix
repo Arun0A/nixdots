@@ -186,7 +186,7 @@ in
   programs.vim = {
     enable = true;
     extraConfig = ''
-      set number
+      set number relativenumber
       set expandtab
       set tabstop=4
       set shiftwidth=4
@@ -194,6 +194,8 @@ in
       set clipboard=unnamedplus
       set noerrorbells
       set novisualbell
+	  set shortmess+=I
+      imap jj <Esc>
     '';
   };
 

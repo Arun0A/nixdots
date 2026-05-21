@@ -7,6 +7,7 @@
 -- https://vonheikemen.github.io/devlog/tools/build-your-first-lua-config-for-neovim/
 
 vim.o.number = true
+vim.opt.relativenumber = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.hlsearch = false
@@ -18,9 +19,11 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.signcolumn = 'yes'
 vim.o.winborder = 'rounded'
+vim.opt.shortmess:append "I"
 
 -- Space as leader key
 vim.g.mapleader = vim.keycode('<Space>')
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit Insert Mode" })
 
 -- Basic clipboard interaction
 vim.keymap.set({'n', 'x'}, 'gy', '"+y', {desc = 'Copy to clipboard'})
