@@ -449,6 +449,37 @@ in
   ################
 
   nixpkgs.config.allowUnfree = true;
+  
   programs.nix-ld.enable = true;
-  system.stateVersion = "25.11";
+  programs.nix-ld.libraries = with pkgs; [
+      # X11
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXi
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXrender
+      xorg.libXext
+      xorg.libXfixes
+      # graphics
+      libGL
+      mesa
+      # audio
+      alsa-lib
+      libpulseaudio
+      # common runtime junk many apps expect
+      stdenv.cc.cc
+      zlib
+      openssl
+      curl
+      glib
+      gtk3
+      freetype
+      fontconfig
+      # optional but often useful
+      SDL2
+      vulkan-loader
+    ];
+
+    system.stateVersion = "25.11";
 }
