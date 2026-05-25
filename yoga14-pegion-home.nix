@@ -28,6 +28,14 @@ in
 		tmux new-window -d -n sioyek sioyek "$(find . -name '*.pdf' | sk)"
       fi
     }
+
+	v() {
+      if [ -n "$1" ]; then
+		tmux new-window -n nvim nvim $1
+      else
+		tmux new-window -n nvim nvim "$(find . -maxdepth 1 | sk)"
+      fi
+	}
 	
     purify-nix-btw() {
       sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system
