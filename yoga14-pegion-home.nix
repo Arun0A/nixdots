@@ -21,6 +21,14 @@ let
 in
 {
   programs.zsh.initContent = ''
+    pdf() {
+      if [ -n "$1" ]; then
+		tmux new-window -d -n sioyek sioyek "$(find . -maxdepth "$1" -name '*.pdf' | sk)"
+      else
+		tmux new-window -d -n sioyek sioyek "$(find . -name '*.pdf' | sk)"
+      fi
+    }
+	
     purify-nix-btw() {
       sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system
       home-manager expire-generations -1days
@@ -66,6 +74,7 @@ in
     kitty
     bc
     broot
+	skim
     zoxide
     firefox
     fzf
