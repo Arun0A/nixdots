@@ -251,6 +251,7 @@ in
 
       # unbind C-b
       # set-option -g prefix C-a
+	  set -g prefix C-SPACE
       # bind-key C-a send-prefix
 
       # bind | split-window -h
@@ -262,15 +263,31 @@ in
       bind -n M-K select-pane -U
       bind -n M-H select-pane -R
       bind -n M-L select-pane -L
+	  bind b set -g status
+
+	  set -g status-position bottom
+	  set -g status-justify right
+	  set -g status-style "bg=default"
 
       # set -g status-bg "#3f5c4c"
       # set -g status-fg "#232424"
+	  # set -g window-status-current-style "fg=#3f5c4c bold"
       
-      set -g status-bg "#9c9c9c"
-      set -g status-fg "#232424"
+      # set -g status-bg "#9c9c9c"
+      # set -g status-fg "#232424"
+	  set -g window-status-current-style "fg=#9c9c9c bold"
+
+	  set -g status-right " (#S)"
+	  set -g status-left ""
 
       set -g mouse on
       set -g default-terminal "tmux-256color"
+
+	  set -a terminal-features "tmux-256color:RGB"
+	  set -g base-index 1
+	  set -g renumber-windows on
+	  set -g mode-keys vi 
+
       set-option -g allow-rename off
       bind '"' split-window -v -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
