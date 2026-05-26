@@ -176,7 +176,7 @@ in
   ################
 
   time.timeZone = "Asia/Kolkata";
-  time.hardwareClockInLocalTime = true;
+  time.hardwareClockInLocalTime = false;
 
   ################
   # Bluetooth
