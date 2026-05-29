@@ -141,6 +141,8 @@ in
     xmodmap
 
     nerd-fonts.jetbrains-mono
+
+	nixfmt-rfc-style
   ];
   
   fonts.fontconfig.enable = true;

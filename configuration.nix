@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs-unstable, ... }:
+{ config, pkgs, inputs, lib, nixpkgs-unstable, ... }:
 
 let
   pkgsUnstable = nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
@@ -265,6 +265,8 @@ in
   environment.systemPackages = with pkgs; [
     pkgs.home-manager
 
+	nixd
+
     wget
     git
     vim
@@ -433,6 +435,9 @@ in
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
+
+  # For LSP
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   ################
   # Gaming
