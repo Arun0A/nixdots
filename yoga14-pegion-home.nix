@@ -4,7 +4,7 @@ let
     ll = "ls -latr";
     l = "ls -ltr";
     
-    yy = "yazi";
+    yy = "tmux new-window -n yazi yazi";
 
     ".." = "cd ..";
     
@@ -16,6 +16,8 @@ let
 
     "cd" = "z"; 
     "cdi" = "zi";
+
+	"loff" = "tmux new-window -d -n libreoffice libreoffice";
   };
 
 in
