@@ -215,7 +215,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- Nix Editor
-require("lspconfig").nixd.setup({
+vim.lsp.config("nixd", {
   cmd = { "nixd" },
   settings = {
     nixd = {
@@ -223,16 +223,18 @@ require("lspconfig").nixd.setup({
         expr = "import <nixpkgs> { }",
       },
       formatting = {
-        command = { "nixfmt" }, -- or nixfmt or nixpkgs-fmt
+        command = { "nixfmt" },
       },
-      -- options = {
-      --   nixos = {
-      --       expr = '(builtins.getFlake "/PATH/TO/FLAKE").nixosConfigurations.CONFIGNAME.options',
-      --   },
-      --   home_manager = {
-      --       expr = '(builtins.getFlake "/PATH/TO/FLAKE").homeConfigurations.CONFIGNAME.options',
-      --   },
-      -- },
+	  options = {
+	    nixos = {
+	      expr = '(builtins.getFlake "/home/pegion/.nixdots").nixosConfigurations.void.options',
+	    },
+	    home_manager = {
+	      expr = '(builtins.getFlake "/home/pegion/.nixdots").homeConfigurations.yoga14.options',
+	    },
+	  },
     },
   },
 })
+
+vim.lsp.enable("nixd")
