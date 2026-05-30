@@ -20,6 +20,7 @@ vim.o.timeoutlen = 300
 vim.o.signcolumn = 'yes'
 vim.o.winborder = 'rounded'
 vim.opt.shortmess:append "I"
+vim.cmd.colorscheme('retrobox')
 
 -- Space as leader key
 vim.g.mapleader = vim.keycode('<Space>')
@@ -79,6 +80,7 @@ MiniDeps.add('folke/tokyonight.nvim')
 MiniDeps.add('folke/which-key.nvim')
 MiniDeps.add('VonHeikemen/ts-enable.nvim')
 MiniDeps.add('neovim/nvim-lspconfig')
+MiniDeps.add('folke/lazydev.nvim')
 MiniDeps.add({
   source = 'nvim-mini/mini.nvim',
   checkout = mini.branch,
@@ -96,8 +98,6 @@ MiniDeps.add({
 -- ========================================================================== --
 -- ==                         PLUGIN CONFIGURATION                         == --
 -- ========================================================================== --
-
-vim.cmd.colorscheme('retrobox')
 
 -- See :help MiniIcons.config
 -- Change style to 'glyph' if you have a font with fancy icons
@@ -163,6 +163,7 @@ require('mini.completion').setup({
 
 -- See :help which-key.nvim-which-key-setup
 require('which-key').setup({
+  delay = 800,
   icons = {
     mappings = false,
     keys = {
@@ -184,6 +185,12 @@ require("colorizer").setup(nil, {
 })
 
 require("mini.pairs").setup({})
+
+require("lazydev").setup({
+  library = {
+    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  },
+})
 
 -- Treesitter setup
 -- NOTE: the list of supported parsers is in the documentation:
@@ -242,7 +249,15 @@ vim.lsp.config("nixd", {
 vim.lsp.enable("nixd")
 
 -- lua
-vim.lsp.config("lua_ls", {})
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+})
 vim.lsp.enable("lua_ls")
 
 -- clang-tools
