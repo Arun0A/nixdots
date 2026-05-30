@@ -183,6 +183,8 @@ require("colorizer").setup(nil, {
   mode = "virtualtext"
 })
 
+require("mini.pairs").setup({})
+
 -- Treesitter setup
 -- NOTE: the list of supported parsers is in the documentation:
 -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
