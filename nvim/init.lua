@@ -240,3 +240,11 @@ vim.lsp.config("nixd", {
 })
 
 vim.lsp.enable("nixd")
+
+-- lua
+vim.lsp.config("lua_ls", {})
+vim.lsp.enable("lua_ls")
+
+-- clang-tools
+vim.lsp.config("clangd", {})
+vim.lsp.enable("clangd")

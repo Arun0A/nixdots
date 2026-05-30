@@ -143,7 +143,6 @@ in
     nerd-fonts.jetbrains-mono
 
 	nixfmt-rfc-style
-	nixd
   ];
   
   fonts.fontconfig.enable = true;
@@ -229,6 +228,11 @@ in
     plugins = with pkgs.vimPlugins; [
       nvim-colorizer-lua
     ];
+	extraPackages = with pkgs; [
+	  nixd
+	  lua-language-server
+	  clang-tools
+	];
   };
   home.file.".config/nvim".source = ./nvim;
 
