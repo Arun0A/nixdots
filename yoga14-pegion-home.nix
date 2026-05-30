@@ -143,6 +143,7 @@ in
     nerd-fonts.jetbrains-mono
 
 	nixfmt-rfc-style
+	nixd
   ];
   
   fonts.fontconfig.enable = true;

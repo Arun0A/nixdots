@@ -266,8 +266,6 @@ in
   environment.systemPackages = with pkgs; [
     pkgs.home-manager
 
-	nixd
-
     wget
     git
     vim
