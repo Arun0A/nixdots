@@ -22,6 +22,11 @@ let
 
 in
 {
+
+  home.sessionVariables = {
+    PATH = "$HOME/.local/bin:$PATH";
+  };
+
   programs.zsh.initContent = ''
     pdf() {
       if [ -n "$1" ]; then
