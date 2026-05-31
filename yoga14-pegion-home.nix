@@ -94,6 +94,7 @@ in
 
   home.packages = with pkgs; [
     net-tools
+	inetutils
     lsof
     kitty
     bc
