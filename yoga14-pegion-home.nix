@@ -43,6 +43,15 @@ in
 		tmux new-window -n nvim nvim "$(find . -maxdepth 1 | sk)"
       fi
 	}
+
+	cdy() {
+		local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+		yazi "$@" --cwd-file="$tmp"
+		if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+			builtin cd -- "$cwd"
+		fi
+		rm -f -- "$tmp"
+	}
 	
     purify-nix-btw() {
       sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system
