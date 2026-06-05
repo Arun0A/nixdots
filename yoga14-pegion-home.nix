@@ -18,6 +18,9 @@ let
     "cdi" = "zi";
 
 	"loff" = "tmux new-window -d -n libreoffice libreoffice";
+
+	"cdc" = "term-cut";
+	"cdp" = "term-paste";
   };
 
 in
@@ -51,6 +54,103 @@ in
 			builtin cd -- "$cwd"
 		fi
 		rm -f -- "$tmp"
+	}
+
+	term-cut() {
+		local buf="$HOME/.terminal_buffer"
+
+		[[ $# -eq 0 ]] && {
+			echo "Usage: term-cut <files...>"
+			return 1
+		}
+
+		touch "$buf"
+
+		for f in "$@"; do
+			local abs="''${f:A}"
+
+			if [[ -e "$abs" ]]; then
+				grep -Fxq "$abs" "$buf" 2>/dev/null || {
+					echo "$abs" >> "$buf"
+					echo "Added: $f"
+				}
+			fi
+		done
+	}
+
+	term-paste() {
+		local buf="$HOME/.terminal_buffer"
+
+		[[ ! -f "$buf" ]] && touch "$buf"
+
+		# --list
+		if [[ "$1" == "--list" ]]; then
+			if [[ ! -s "$buf" ]]; then
+				echo "Buffer empty"
+				return
+			fi
+
+			nl -w2 -s': ' "$buf"
+			return
+		fi
+
+		# --clear
+		if [[ "$1" == "--clear" ]]; then
+			: > "$buf"
+			echo "Buffer cleared"
+			return
+		fi
+
+		# --pick
+		if [[ "$1" == "--pick" ]]; then
+			command -v sk >/dev/null || {
+				echo "sk not found"
+				return 1
+			}
+
+			local selected
+			selected=$(sk -m < "$buf")
+
+			[[ -z "$selected" ]] && return
+
+			local tmp
+			tmp=$(mktemp)
+
+			while IFS= read -r file; do
+				if print -l -- "$selected" | grep -Fxq "$file"; then
+					if [[ -e "$file" ]]; then
+						mv "$file" .
+						echo "Moved: ''${file:t}"
+					fi
+				else
+					echo "$file" >> "$tmp"
+				fi
+			done < "$buf"
+
+			mv "$tmp" "$buf"
+			return
+		fi
+
+		# pattern or everything
+		local pattern="''${1:-*}"
+		local tmp
+		tmp=$(mktemp)
+
+		while IFS= read -r file; do
+			# Skip stale entries
+			if [[ ! -e "$file" ]]; then
+				continue
+			fi
+
+			if [[ "''${file:t}" == ''${~pattern} ]]; then
+				mv "$file" .
+				echo "Moved: ''${file:t}"
+			else
+				echo "$file" >> "$tmp"
+			fi
+		done < "$buf"
+
+		mv "$tmp" "$buf"
 	}
 	
     purify-nix-btw() {
