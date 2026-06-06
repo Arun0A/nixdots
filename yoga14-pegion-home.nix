@@ -255,6 +255,11 @@ in
     playerctl
     xmodmap
 
+	usbutils
+	android-file-transfer
+	jmtpfs
+	libmtp
+
     nerd-fonts.jetbrains-mono
 
 	nixfmt-rfc-style
