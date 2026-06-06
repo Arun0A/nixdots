@@ -16,7 +16,7 @@ static const char *fonts[] = {
 /* static const char dmenufont[]       = "monospace:size=10"; */
 static const char dmenufont[]       = "JetBrainsMonoNLNerdFont-Regular:size=10";
 
-#include "walls/rain_world-colors.h"
+#include "walls/black_white_pastel-colors.h"
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
