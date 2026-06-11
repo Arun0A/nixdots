@@ -296,6 +296,7 @@ in
 
     cloudflare-warp
     evtest
+	keyd
 
     pulseaudio
     lm_sensors
@@ -447,6 +448,34 @@ in
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+
+
+  ################
+  # keyd 
+  ################
+
+  services.keyd = {
+    enable = true;
+  
+    keyboards.default.settings = {
+      main = {
+        rightalt = "layer(nav)";
+      };
+  
+      nav = {
+        h = "left";
+        j = "down";
+        k = "up";
+        l = "right";
+
+		o = "home";
+		p = "end";
+		i = "pageup";
+		m = "pagedown";
+		n = "delete";
+      };
+    };
+  };
 
   ################
   # System version
