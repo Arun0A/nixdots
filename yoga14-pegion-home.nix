@@ -2,7 +2,7 @@
 let
   myaliases = {
     ll = "ls -latr";
-    l = "ls -ltr";
+    l = "ls -lhtr";
     
     yy = "tmux new-window -n yazi yazi";
 
