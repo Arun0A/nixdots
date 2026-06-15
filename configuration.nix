@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+	./fprint55a2.nix
   ];
 
   services.logind.settings.Login.HandlePowerKey = "suspend";
