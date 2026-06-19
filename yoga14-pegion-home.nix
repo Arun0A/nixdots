@@ -19,7 +19,7 @@ let
 
 	"loff" = "tmux new-window -d -n libreoffice libreoffice";
 
-	"cdc" = "term-cut";
+	"cdx" = "term-cut";
 	"cdp" = "term-paste";
   };
 
