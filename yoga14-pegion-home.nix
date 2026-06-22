@@ -249,6 +249,8 @@ in
     audacity
     audacious
 
+	clang-tools
+
     xdotool
     dwmblocks
     touchegg
