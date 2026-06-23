@@ -102,8 +102,16 @@ in
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "tailscale0" "virbr0" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-    allowedTCPPorts = [ 8443 ];
+    allowedUDPPorts = [ config.services.tailscale.port 7236 5353 ];
+    allowedTCPPorts = [ 8443 7236 5353 ];
+  };
+
+  # Enable XDG Desktop Portal for screensharing
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    };
   };
 
   # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
@@ -319,6 +327,7 @@ in
     lutris
     bottles
 
+	gnome-network-displays
   ];
 
   environment.variables.EDITOR = "vim";
