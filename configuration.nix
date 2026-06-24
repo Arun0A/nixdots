@@ -110,6 +110,9 @@ in
   xdg = {
     portal = {
       enable = true;
+	  config = {
+	    common.default = [ "gtk" ];
+	  };
       extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
     };
   };
@@ -328,6 +331,7 @@ in
     bottles
 
 	gnome-network-displays
+	xdg-utils
   ];
 
   environment.variables.EDITOR = "vim";
