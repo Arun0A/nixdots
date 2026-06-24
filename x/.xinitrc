@@ -1,3 +1,18 @@
+export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=dwm
+
+systemctl --user import-environment \
+    DISPLAY \
+    XAUTHORITY \
+    XDG_SESSION_TYPE \
+    XDG_CURRENT_DESKTOP
+
+dbus-update-activation-environment --systemd \
+    DISPLAY \
+    XAUTHORITY \
+    XDG_SESSION_TYPE \
+    XDG_CURRENT_DESKTOP
+
 pulseaudio --start &
 ~/.fehbg
 # xset b off
@@ -10,7 +25,7 @@ xinput set-prop "Logitech MX Anywhere 3S" 349 0 & # Disable MXA3S High-Res Scrol
 xmodmap -e "keycode 191 = Delete"
 redshift -O 5000
 ~/.nixdots/dwm/status.sh &
-export XDG_SESSION_TYPE=x11
+
 # exec dwm
 while true; do
     # dwm 2> ~/.dwm.log
