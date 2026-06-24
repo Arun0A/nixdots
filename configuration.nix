@@ -459,6 +459,11 @@ in
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
 
+  ################
+  # Flatpak 
+  ################
+
+  services.flatpak.enable = true;
 
   ################
   # keyd 
