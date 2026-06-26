@@ -500,6 +500,84 @@ in
   };
 
   ################
+  # xdg mimeApps
+  ################
+  # find $(echo $XDG_DATA_DIRS | tr ':' ' ') -path '*/applications/*.desktop' 2>/dev/null | sort 
+
+  xdg.mimeApps = {
+    enable = true;
+  
+    defaultApplications = {
+      # Directories
+      "inode/directory" = [ "org.kde.dolphin.desktop" ];
+  
+      # Browser
+      "text/html" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/http" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/https" = [ "brave-browser.desktop" ];
+  
+      # Mail
+      "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
+  
+      # PDF
+      "application/pdf" = [ "sioyek.desktop" ];
+  
+      # Images
+      "image/png" = [ "qimgv.desktop" ];
+      "image/jpeg" = [ "qimgv.desktop" ];
+      "image/gif" = [ "qimgv.desktop" ];
+      "image/webp" = [ "qimgv.desktop" ];
+      "image/bmp" = [ "qimgv.desktop" ];
+      "image/tiff" = [ "qimgv.desktop" ];
+      "image/svg+xml" = [ "qimgv.desktop" ];
+      "image/x-xpixmap" = [ "qimgv.desktop" ];
+      "image/x-portable-pixmap" = [ "qimgv.desktop" ];
+  
+      # Video
+      "video/mp4" = [ "mpv.desktop" ];
+      "video/x-matroska" = [ "mpv.desktop" ];
+      "video/webm" = [ "mpv.desktop" ];
+      "video/quicktime" = [ "mpv.desktop" ];
+      "video/x-msvideo" = [ "mpv.desktop" ];
+      "video/mpeg" = [ "mpv.desktop" ];
+  
+      # Audio
+      "audio/mpeg" = [ "audacious.desktop" ];
+      "audio/flac" = [ "audacious.desktop" ];
+      "audio/ogg" = [ "audacious.desktop" ];
+      "audio/wav" = [ "audacious.desktop" ];
+      "audio/x-wav" = [ "audacious.desktop" ];
+      "audio/aac" = [ "audacious.desktop" ];
+  
+      # LibreOffice Writer
+      "application/msword" = [ "writer.desktop" ];
+      "application/rtf" = [ "writer.desktop" ];
+      "application/vnd.oasis.opendocument.text" = [ "writer.desktop" ];
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [ "writer.desktop" ];
+  
+      # LibreOffice Calc
+      "application/vnd.ms-excel" = [ "calc.desktop" ];
+      "application/vnd.oasis.opendocument.spreadsheet" = [ "calc.desktop" ];
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [ "calc.desktop" ];
+  
+      # LibreOffice Impress
+      "application/vnd.ms-powerpoint" = [ "impress.desktop" ];
+      "application/vnd.oasis.opendocument.presentation" = [ "impress.desktop" ];
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [ "impress.desktop" ];
+  
+      # Plain text / source code
+      "text/plain" = [ "nvim.desktop" ];
+      "text/x-c" = [ "nvim.desktop" ];
+      "text/x-c++" = [ "nvim.desktop" ];
+      "text/x-python" = [ "nvim.desktop" ];
+      "text/x-java" = [ "nvim.desktop" ];
+      "text/x-rust" = [ "nvim.desktop" ];
+      "application/json" = [ "nvim.desktop" ];
+      "application/xml" = [ "nvim.desktop" ];
+    };
+  };
+
+  ################
   # Home manager
   ################
 
