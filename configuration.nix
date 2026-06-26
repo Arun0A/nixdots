@@ -117,6 +117,8 @@ in
     };
   };
 
+  programs.dconf.enable = true;
+
   # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
   # This avoids the "iptables-compat" translation layer issues.
   systemd.services.tailscaled.serviceConfig.Environment = [

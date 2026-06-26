@@ -473,9 +473,30 @@ in
     name = "Bibata-Modern-Classic";
     package = pkgs.bibata-cursors;
     size = 14;
-
-    gtk.enable = true;
+	gtk.enable = true;
     x11.enable = true;
+  };
+
+  gtk = {
+    enable = true;
+  
+    theme = {
+      package = pkgs.catppuccin-gtk;
+      name = "catppuccin-frappe-blue-standard";
+    };
+  
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+  
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+  
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
 
   ################
