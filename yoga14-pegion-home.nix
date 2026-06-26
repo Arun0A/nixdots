@@ -481,8 +481,8 @@ in
     enable = true;
   
     theme = {
-      package = pkgs.catppuccin-gtk;
-      name = "catppuccin-frappe-blue-standard";
+      package = pkgs.graphite-gtk-theme;
+      name = "Graphite-Dark";
     };
   
     iconTheme = {
