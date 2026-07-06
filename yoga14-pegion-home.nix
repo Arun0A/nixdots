@@ -193,6 +193,7 @@ in
   ################
 
   home.packages = with pkgs; [
+  	tealdeer
     net-tools
 	inetutils
     lsof
