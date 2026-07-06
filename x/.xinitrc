@@ -15,7 +15,7 @@ dbus-update-activation-environment --systemd \
 
 pulseaudio --start &
 ~/.fehbg
-# xset b off
+xset b off
 picom -b --backend glx &
 # blueman-applet &
 copyq &
