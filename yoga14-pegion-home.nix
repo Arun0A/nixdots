@@ -31,6 +31,9 @@ in
   };
 
   programs.zsh.initContent = ''
+
+	export MANPAGER="sh -c 'sed -u -e \"s/\\\\x1B\\[[0-9;]*m//g; s/. \\\\x08//g\" | bat -p -lman'"
+
     pdf() {
       if [ -n "$1" ]; then
 		tmux new-window -d -n sioyek sioyek "$(find . -maxdepth "$1" -name '*.pdf' | sk)"
@@ -305,7 +308,6 @@ in
 
   programs.bash = {
     enable = true;
-
     shellAliases = myaliases;
   };
 
