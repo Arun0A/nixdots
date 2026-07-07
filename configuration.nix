@@ -12,13 +12,17 @@ in
   services.logind.settings.Login.HandlePowerKey = "suspend";
 
   # tty greeting
-  services.getty.greetingLine = "";
+  services.getty.greetingLine = "\\e[1;36m<< If you are reading this, it is probably not your device. Return it to the \\e[1;31mOWNER : Arun Bhattacharya (arun0a_in@hotmail.com)\\e[1;36m >> \\e[0m";
+
   # help line
-  environment.etc."issue".text = ''<< If you are reading this, it is probably not your device. Return it to the OWNER : Arun Bhattacharya (arun0a_in@hotmail.com) >>
-\d | \t | \l
+#   environment.etc."issue".text = ''<< If you are reading this, it is probably not your device. Return it to the OWNER : Arun Bhattacharya (arun0a_in@hotmail.com) >>
+# \d | \t | \l
+# 
+#   '';
 
-  '';
+  services.getty.helpLine = lib.mkForce ''\d | \l'';
 
+  # systemd.services."getty@".serviceConfig.Type = "simple";
 
   ################
   # Bootloader
@@ -27,9 +31,9 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelParams = [
-    "quiet"
-    "loglevel=0"
-    "rd.systemd.show_status=false"
+    # "quiet"
+    # "loglevel=0"
+    # "rd.systemd.show_status=false"
     "rd.udev.log_level=3"
     "udev.log_priority=3"
     "v4l2loopback.devices=2"
@@ -39,6 +43,7 @@ in
   ];
   boot.consoleLogLevel = lib.mkForce 0;
   boot.initrd.verbose = true;
+  # boot.initrd.systemd.enable = false;
 
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=2 video_nr=1,2 \
