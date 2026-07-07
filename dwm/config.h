@@ -124,6 +124,9 @@ static const Key keys[] = {
 	/* { 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
 	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
+	{ SUPKEY|ControlMask,             XK_0,      spawn,          SHCMD("picom-trans -c -o 100") },
+	{ SUPKEY|ControlMask,             XK_minus,      spawn,          SHCMD("picom-trans -c -10") },
+	{ SUPKEY|ControlMask,             XK_equal,      spawn,          SHCMD("picom-trans -c +10") },
 	TAGKEYS(                        XK_F1,                      0)
 	TAGKEYS(                        XK_F2,                      1)
 	TAGKEYS(                        XK_F3,                      2)
