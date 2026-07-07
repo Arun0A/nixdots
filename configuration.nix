@@ -291,9 +291,9 @@ in
     udisks2
 
     slock
-    xorg.xinit
-    xorg.xrandr
-    xorg.xsetroot
+    xinit
+    xrandr
+    xsetroot
     dmenu
     xclip
     picom
@@ -325,7 +325,7 @@ in
     spice-gtk
     polkit_gnome
 
-    wineWowPackages.stable
+    wineWow64Packages.stable
     winetricks
     mangohud
     protonup-qt
@@ -507,14 +507,14 @@ in
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
       # X11
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXi
-      xorg.libXrandr
-      xorg.libXinerama
-      xorg.libXrender
-      xorg.libXext
-      xorg.libXfixes
+      libx11
+      libxcursor
+      libxi
+      libxrandr
+      libxinerama
+      libxrender
+      libxext
+      libxfixes
       # graphics
       libGL
       mesa

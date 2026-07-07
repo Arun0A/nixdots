@@ -269,7 +269,7 @@ in
 
     nerd-fonts.jetbrains-mono
 
-	nixfmt-rfc-style
+	nixfmt
   ];
   
   fonts.fontconfig.enable = true;
@@ -351,6 +351,9 @@ in
   ################
   programs.neovim = {
     enable = true;
+    initLua = builtins.readFile ./nvim/init.lua;
+    withRuby = false;
+    withPython3 = false;
     plugins = with pkgs.vimPlugins; [
       nvim-colorizer-lua
     ];
@@ -360,13 +363,12 @@ in
 	  clang-tools
 	];
   };
-  home.file.".config/nvim".source = ./nvim;
 
   ################
   # kitty 
   ################
   programs.kitty = {
-    enable = true;
+    enable = false;
     # extraConfig = ''
     #   confirm_os_window_close 0
     #   map ctrl+backspace send_text all \x17
@@ -507,6 +509,8 @@ in
       gtk-application-prefer-dark-theme = 1;
 	  gtk-error-bell = 0;
     };
+
+    gtk4.theme = config.gtk.theme;
   };
 
   ################
