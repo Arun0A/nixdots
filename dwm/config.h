@@ -70,11 +70,21 @@ static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
 
 #include "movestack.c"
 
+static const char *statusupdatecmd[] = { "/bin/sh", "-c", "kill -USR1 $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null", NULL };
+
+void
+togglebarandupdate(const Arg *arg)
+{
+	togglebar(arg);
+	spawn(&(Arg){.v = statusupdatecmd});
+}
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ SUPKEY,                       XK_b,      togglebar,      {0} },
+	{ SUPKEY,                       XK_b,      togglebarandupdate, {0} },
+	{ SUPKEY|ShiftMask,             XK_b,      spawn,          SHCMD("kill $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null; ~/.nixdots/dwm/status.sh &") },
 	{ SUPKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
 	{ MODKEY,                       XK_Tab,    focusstackvis,  {.i = +1 } },
 	{ SUPKEY,                       XK_k,      focusstackvis,  {.i = -1 } },

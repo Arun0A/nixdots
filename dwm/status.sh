@@ -1,7 +1,13 @@
 #!/bin/sh
 
+# Write PID to file for targeted signaling
+echo $$ > /tmp/status.pid
+
+# Trap USR1 (signal 10) to wake up the loop immediately
+trap : USR1
+
 while true; do
- 
+  
   # Battery with status
   battery=$(cat /sys/class/power_supply/BAT1/capacity)%
   bat_stat=`cat /sys/class/power_supply/BAT1/status`
@@ -17,7 +23,7 @@ while true; do
     battery+="E"
   fi
 
-  datetime=$(date '+%a %d %b %H:%M')
+  datetime=$(date '+%a %d %b %H:%M:%S')
 
   # CPU temperature (assumes lm_sensors)
   cpu_temp=$(sensors | grep -m 1 'Package' | awk '{print $4}')
@@ -86,5 +92,8 @@ while true; do
   else
     xsetroot -name "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
   fi
-  sleep 30
+  sleep 30 &
+  sleep_pid=$!
+  wait $sleep_pid
+  kill $sleep_pid 2>/dev/null
 done

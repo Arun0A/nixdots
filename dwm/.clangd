@@ -1,0 +1,6 @@
+# Suppress clangd diagnostics for dwm config headers since they are not standalone translation units
+If:
+  PathMatch: .*config\.(def\.)?h
+
+Diagnostics:
+  Suppress: ["*"]
