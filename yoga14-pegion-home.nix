@@ -249,7 +249,7 @@ in
     ]))
     qbittorrent
     nicotine-plus
-    krita
+	gimp
     kdePackages.kdenlive
     audacity
     audacious
