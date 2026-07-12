@@ -261,5 +261,17 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable("lua_ls")
 
 -- clang-tools
-vim.lsp.config("clangd", {})
+vim.lsp.config("clangd", {
+  cmd = {
+    "clangd",
+    "--completion-style=detailed",
+    "--function-arg-placeholders=false",
+  },
+  capabilities = (function()
+    local caps = vim.lsp.protocol.make_client_capabilities()
+    caps.textDocument.completion.completionItem.snippetSupport = false
+    return caps
+  end)(),
+})
 vim.lsp.enable("clangd")
+
