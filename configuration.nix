@@ -537,6 +537,9 @@ in
       fontconfig
       # optional but often useful
       SDL2
+	  SDL2_image
+	  SDL2_mixer
+	  SDL2_ttf
       vulkan-loader
     ];
 
