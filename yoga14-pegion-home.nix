@@ -157,6 +157,41 @@ in
 		mv "$tmp" "$buf"
 	}
 	
+	runbinary() {
+		(( $# )) || {
+			echo "Usage: runbinary <program> [args...]"
+			return 1
+		}
+
+		local prog="$1"
+		shift
+
+		local dir
+		dir="$(cd "$(dirname "$prog")" && pwd)"
+
+		local -a libdirs=(
+			"$dir"
+			"$dir/lib"
+			"$dir/libs"
+			"$dir/lib64"
+			"$dir/bin"
+			"$dir/bin/amd64"
+			"$dir/bin/x86_64"
+			"$dir/bin/x86"
+		)
+
+		local ldpath="$LD_LIBRARY_PATH"
+
+		for d in "''${libdirs[@]}"; do
+			[[ -d "$d" ]] && ldpath="$d''${ldpath:+:$ldpath}"
+		done
+
+		(
+			export LD_LIBRARY_PATH="$ldpath"
+			exec "$prog" "$@"
+		)
+	}
+	
     purify-nix-btw() {
       sudo nix-env --delete-generations +2 --profile /nix/var/nix/profiles/system
       home-manager expire-generations -1days
