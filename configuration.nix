@@ -137,23 +137,43 @@ in
   ################
   # fmd-server
   ################
-  environment.etc."fmd-server/config.yml".text = ''
-    DatabaseDir: "/var/lib/fmd-server/db"
+  # environment.etc."fmd-server/config.yml".text = ''
+  #   DatabaseDir: "/var/lib/fmd-server/db"
 
-    PortSecure: 8443
-    PortInsecure: -1
+  #   PortSecure: 8443
+  #   PortInsecure: -1
 
-    ServerCrt: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.crt"
-    ServerKey: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.key"
-  '';
+  #   ServerCrt: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.crt"
+  #   ServerKey: "/var/lib/fmd-server/certs/void.feist-arctic.ts.net.key"
+  # '';
+  # systemd.services.fmd-server = {
+  #   description = "Find My Device Server";
+  #   wantedBy = [ "multi-user.target" ];
+
+  #   serviceConfig = {
+  #     ExecStart = "${pkgsUnstable.fmd-server}/bin/fmd-server serve -c /etc/fmd-server/config.yml";
+  #     Restart = "always";
+  #     StateDirectory = "fmd-server";
+  #   };
+  # };
+
   systemd.services.fmd-server = {
-    description = "Find My Device Server";
+    description = "FMD-Server";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
-
+  
     serviceConfig = {
-      ExecStart = "${pkgsUnstable.fmd-server}/bin/fmd-server serve -c /etc/fmd-server/config.yml";
-      Restart = "always";
+      Type = "simple";
+  
+      ExecStart = ''
+        /home/pegion/drived/Space/fmd-server/fmd-server serve -c /home/pegion/drived/Space/fmd-server/config.yml
+      '';
+  
+      Restart = "on-failure";
+  
       StateDirectory = "fmd-server";
+      WorkingDirectory = "/var/lib/fmd-server";
     };
   };
 
