@@ -27,7 +27,7 @@ in
 {
 
   home.sessionVariables = {
-    PATH = "$HOME/.local/bin:$PATH";
+    PATH = "$HOME/.local/bin:$HOME/scripts:$PATH";
   };
 
   programs.zsh.initContent = ''
