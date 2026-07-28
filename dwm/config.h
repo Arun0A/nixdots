@@ -137,6 +137,7 @@ static const Key keys[] = {
 	{ SUPKEY|ControlMask,             XK_0,      spawn,          SHCMD("picom-trans -c -o 100") },
 	{ SUPKEY|ControlMask,             XK_minus,      spawn,          SHCMD("picom-trans -c -10") },
 	{ SUPKEY|ControlMask,             XK_equal,      spawn,          SHCMD("picom-trans -c +10") },
+	{ SUPKEY|ShiftMask,             XK_m,      spawn,          SHCMD("iblind -w 1024 -h 512 -x 1920 -y 1080 -z 2 -c 9c9c9c -p") },
 	TAGKEYS(                        XK_F1,                      0)
 	TAGKEYS(                        XK_F2,                      1)
 	TAGKEYS(                        XK_F3,                      2)
