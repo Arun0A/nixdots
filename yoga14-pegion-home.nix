@@ -288,6 +288,8 @@ in
     kdePackages.kdenlive
     audacity
     audacious
+	mpc
+	rmpc
 
 	clang-tools
 
@@ -625,6 +627,28 @@ in
       "application/xml" = [ "nvim.desktop" ];
     };
   };
+  
+  ################
+  # MPD
+  ################
+  services.mpd = {
+    enable = true;
+  
+    musicDirectory = "/home/pegion/Music";
+  
+    network = {
+      listenAddress = "127.0.0.1";
+      port = 6600;
+    };
+  
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "PipeWire"
+      }
+    '';
+  };
+
 
   ################
   # Home manager
