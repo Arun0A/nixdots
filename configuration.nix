@@ -234,6 +234,9 @@ in
   programs.virt-manager.enable = true;
   security.polkit.enable = true;
   virtualisation.libvirtd.qemu.swtpm.enable = true;
+  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+  virtualisation.libvirtd.qemu.runAsRoot = true;
+  virtualisation.libvirtd.qemu.vhostUserPackages = [ pkgs.virtiofsd ];
 
   ################
   # X11 + DWM
@@ -345,6 +348,7 @@ in
 
     virt-manager
     qemu
+	virtiofsd
     virt-viewer
     spice
     spice-gtk
