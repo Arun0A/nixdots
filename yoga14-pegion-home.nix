@@ -306,6 +306,9 @@ in
 
     nerd-fonts.jetbrains-mono
 
+	dunst
+	libnotify
+
 	nixfmt
   ];
   
