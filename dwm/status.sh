@@ -9,20 +9,29 @@ trap : USR1
 while true; do
   
   # Battery with status
-  battery=$(cat /sys/class/power_supply/BAT1/capacity)%
-  bat_stat=`cat /sys/class/power_supply/BAT1/status`
-  if [[ "$bat_stat" == "Charging"  ]]; then
-    battery+="*"
-  elif [[ "$bat_stat" == "Full"  ]]; then
-    battery+="*"
+  capacity=$(cat /sys/class/power_supply/BAT1/capacity)
+  battery="${capacity}%"
+  bat_stat=$(cat /sys/class/power_supply/BAT1/status)
+  
+  if [[ "$bat_stat" == "Charging" ]]; then
+      battery+="*"
+      rm -f /tmp/battery_warned
+  elif [[ "$bat_stat" == "Full" ]]; then
+      battery+="*"
+      rm -f /tmp/battery_warned
   elif [[ "$bat_stat" == "Not charging" ]]; then
-    battery+="!"
+      battery+="!"
+      rm -f /tmp/battery_warned
   elif [[ "$bat_stat" == "Discharging" ]]; then
-    battery+=""
+      if (( capacity <= 10 )) && [ ! -f /tmp/battery_warned ]; then
+          notify-send -u critical "Battery Low"
+          touch /tmp/battery_warned
+      fi
   else
-    battery+="E"
+      battery+="E"
+      rm -f /tmp/battery_warned
   fi
-
+  
   datetime=$(date '+%a %d %b %H:%M:%S')
 
   # CPU temperature (assumes lm_sensors)
