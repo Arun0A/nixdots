@@ -417,6 +417,11 @@ in
     # '';
   };
   home.file.".config/kitty".source = ./kitty;
+
+  ################
+  # dunst 
+  ################
+  home.file.".config/dunst".source = ./dunst;
   
   ################
   # tmux 
