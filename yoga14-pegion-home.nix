@@ -233,6 +233,7 @@ in
 
   home.packages = with pkgs; [
   	tealdeer
+	file
     net-tools
 	inetutils
     lsof
