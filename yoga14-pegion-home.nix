@@ -278,7 +278,6 @@ in
     appimage-run
     yt-dlp
     blobdrop
-    croc
     (pkgs.texlive.withPackages (ps: with ps; [
       latexmk
       scheme-medium
