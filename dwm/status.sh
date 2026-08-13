@@ -72,11 +72,11 @@ while true; do
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
   warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
 
-  if playerctl status 2>/dev/null | grep -q "^Playing$"; then
-    mus=$(playerctl metadata --format '{{title}} - {{artist}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
+  if /home/pegion/.nixdots/dwm/playerctl_wrapper.sh status 2>/dev/null | grep -q "^Playing$"; then
+    mus=$(/home/pegion/.nixdots/dwm/playerctl_wrapper.sh metadata --format '{{title}} - {{artist}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
 
     if [ -z "$mus" ]; then
-      mus=$(playerctl metadata --format '{{title}}' 2>/dev/null)
+      mus=$(/home/pegion/.nixdots/dwm/playerctl_wrapper.sh metadata --format '{{title}}' 2>/dev/null)
     fi
 
     maxlen=40

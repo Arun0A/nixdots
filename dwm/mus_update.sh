@@ -5,12 +5,12 @@ sleep 0.2
 title=""
 i=0
 while [ "$i" -lt 10 ]; do
-  title=$(playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
+  title=$(/home/pegion/.nixdots/dwm/playerctl_wrapper.sh metadata --format '{{artist}} - {{title}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
   if [ -n "$title" ]; then
     break
   fi
 
-  title=$(playerctl metadata --format '{{title}}' 2>/dev/null)
+  title=$(/home/pegion/.nixdots/dwm/playerctl_wrapper.sh metadata --format '{{title}}' 2>/dev/null)
   if [ -n "$title" ]; then
     break
   fi

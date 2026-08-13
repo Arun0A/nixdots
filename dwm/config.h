@@ -129,10 +129,14 @@ static const Key keys[] = {
 	/* { 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
 	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
 	/* Lenovo ThinkBook extra buttons, remapped via udev hwdb to F13/F14/F15. */
-	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("playerctl previous; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("playerctl next; ~/.nixdots/dwm/mus_update.sh" ) },
-	/* { 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
-	{ 0, 			XK_Help,  	 spawn, 	SHCMD("playerctl play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
+	/* { 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
+	{ 0, 			XK_Help,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+	/* Standard global media keys */
+	{ 0, 			XF86XK_AudioPlay,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_AudioNext,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
+	{ 0, 			XF86XK_AudioPrev,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
 	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
 	{ SUPKEY|ControlMask,             XK_0,      spawn,          SHCMD("picom-trans -c -o 100") },
 	{ SUPKEY|ControlMask,             XK_minus,      spawn,          SHCMD("picom-trans -c -10") },
