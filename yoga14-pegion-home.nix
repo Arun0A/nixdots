@@ -446,6 +446,11 @@ in
   home.file.".config/dunst".source = ./dunst;
   
   ################
+  # rmpc
+  ################
+  home.file.".config/rmpc".source = ./rmpc;
+  
+  ################
   # tmux 
   ################
   programs.tmux = {
