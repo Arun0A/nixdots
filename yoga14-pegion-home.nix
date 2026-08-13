@@ -43,6 +43,27 @@ in
       fi
     }
 
+	tdg() {
+	  if [ "$1" = "." ]; then
+	    sudo tailscale file get --loop=true "$PWD"
+	  elif [ -n "$1" ]; then
+	    sudo tailscale file get --loop=true "$1"
+	  else
+	    sudo tailscale file get --loop=true "$HOME/Downloads/"
+	  fi
+	}
+
+	tds() {
+	  if [ "$1" = "." ]; then
+	    sudo tailscale file cp "$PWD" nipa:
+	  elif [ -n "$1" ]; then
+	    sudo tailscale file cp "$1" nipa:
+	  else
+	    echo "Usage: tds <file-or-directory>"
+	    return 1
+	  fi
+	}
+
 	v() {
       if [ -n "$1" ]; then
 		tmux new-window -n nvim nvim $1
