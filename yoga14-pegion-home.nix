@@ -679,6 +679,8 @@ in
   services.mpd = {
     enable = true;
   
+    enableSessionVariables = false;
+  
     musicDirectory = "/home/pegion/Music";
   
     network = {
@@ -687,24 +689,25 @@ in
     };
   
     extraConfig = ''
+      bind_to_address "/tmp/mpd_socket"
+  
       audio_output {
         type "pipewire"
         name "PipeWire"
       }
+  
       audio_output {
-        type   "fifo"
-        name   "my_fifo"
-        path   "/tmp/mpd.fifo"
+        type "fifo"
+        name "my_fifo"
+        path "/tmp/mpd.fifo"
         format "44100:16:2"
       }
     '';
-  };
-
+  };  
   services.mpdris2 = {
     enable = true;
     multimediaKeys = true;
   };
-
 
   ################
   # Home manager

@@ -2,10 +2,13 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
-    address: "127.0.0.1:6600",
+    address: "/tmp/mpd_socket",
     password: None,
     theme: Some("def"),
-    cache_dir: None,
+    cache_dir: Some("/tmp/rmpc/cache"),
+	extra_yt_dlp_args: [
+        "--cookies-from-browser=brave",
+    ],
     on_song_change: None,
     volume_step: 5,
     max_fps: 30,
@@ -159,7 +162,7 @@
             waves: false,
         ),
     ),
-    tabs: [
+	tabs: [
         (
             name: "Queue",
             border_type: None,
