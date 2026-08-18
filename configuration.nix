@@ -288,6 +288,9 @@ in
       corefonts
       liberation_ttf
       dejavu_fonts
+	  iosevka
+	  nerd-fonts.iosevka
+	  nerd-fonts.iosevka-term
     ];
   };
 
