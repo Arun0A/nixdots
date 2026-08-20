@@ -321,6 +321,8 @@ in
     playerctl
     xmodmap
 
+	alsa-utils
+
 	usbutils
 	android-file-transfer
 	jmtpfs
