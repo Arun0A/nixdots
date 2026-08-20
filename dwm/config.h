@@ -16,19 +16,19 @@ static const char *fonts[] = {
 /* static const char dmenufont[]       = "monospace:size=10"; */
 static const char dmenufont[]       = "JetBrainsMonoNLNerdFont-Regular:size=10";
 
-#include "walls/junji-ito-2-colors.h"
+#include "walls/black_white_pastel-colors.h"
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
-	/* xprop(1):
-	 *	WM_CLASS(STRING) = instance, class
-	 *	WM_NAME(STRING) = title
-	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+    /* xprop(1):
+     *	WM_CLASS(STRING) = instance, class
+     *	WM_NAME(STRING) = title
+     */
+    /* class      instance    title       tags mask     isfloating   monitor */
+    { "Gimp",     NULL,       NULL,       0,            1,           -1 },
+    { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -40,30 +40,29 @@ static const int refreshrate = 120;  /* refresh rate (per second) for client mov
 
 #include "fibonacci.c"
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
+    /* symbol     arrange function */
+    { "[]=",      tile },    /* first entry is default */
+    { "><>",      NULL },    /* no layout function means floating behavior */
+    { "[M]",      monocle },
+    { "[@]",      spiral },
+    { "[\\]",     dwindle },
 };
 
 /* key definitions */
 #define MODKEY Mod1Mask // Alt Key
 #define SUPKEY Mod4Mask // Win Key
 #define TAGKEYS(KEY,TAG) \
-	{ SUPKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ SUPKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ SUPKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ SUPKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+    { SUPKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+    { SUPKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+    { SUPKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+    { SUPKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-// static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_shark, "-nf", col_gray3, "-sb", col_mingreen, "-sf", col_shark, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_dmenu_nb, "-nf", col_dmenu_nf, "-sb", col_dmenu_sb, "-sf", col_dmenu_sf, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
 static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
@@ -75,100 +74,100 @@ static const char *statusupdatecmd[] = { "/bin/sh", "-c", "kill -USR1 $(cat /tmp
 void
 togglebarandupdate(const Arg *arg)
 {
-	togglebar(arg);
-	spawn(&(Arg){.v = statusupdatecmd});
+    togglebar(arg);
+    spawn(&(Arg){.v = statusupdatecmd});
 }
 
 static const Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ SUPKEY,                       XK_b,      togglebarandupdate, {0} },
-	{ SUPKEY|ShiftMask,             XK_b,      spawn,          SHCMD("kill $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null; ~/.nixdots/dwm/status.sh &") },
-	{ SUPKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
-	{ MODKEY,                       XK_Tab,    focusstackvis,  {.i = +1 } },
-	{ SUPKEY,                       XK_k,      focusstackvis,  {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Tab,    focusstackvis,  {.i = -1 } },
-	{ SUPKEY|ShiftMask,             XK_j,      focusstackhid,  {.i = +1 } },
-	{ SUPKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = -1 } },
-	{ SUPKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ SUPKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ SUPKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ SUPKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ SUPKEY|ControlMask,           XK_j,      movestack,      {.i = +1 } },
-	{ SUPKEY|ControlMask,           XK_k,      movestack,      {.i = -1 } },
-	{ SUPKEY,                       XK_Return, zoom,           {0} },
-	{ SUPKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ SUPKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ SUPKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ SUPKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ SUPKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
-	{ SUPKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
-	{ SUPKEY,                       XK_space,  setlayout,      {0} },
-	{ SUPKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ SUPKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ SUPKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ SUPKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ SUPKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ SUPKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ SUPKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ SUPKEY,                       XK_s,      show,           {0} },
-	{ SUPKEY|ShiftMask,             XK_s,      showall,        {0} },
-	{ SUPKEY|ControlMask,           XK_s,      togglesticky,   {0} },
-	{ SUPKEY|ShiftMask,             XK_h,      hide,           {0} },
-	{ SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 1; xset dpms force off") },
-	{ SUPKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock & systemctl suspend") },
-	{ 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
-	{ 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
-	{ 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5 --allow-boost; ~/.nixdots/dwm/vol_update.sh") },
-	/* { 0, 			XF86XK_AudioLowerVolume,   spawn, 	SHCMD("pamixer -d 5 --allow-boost; pkill -RTMIN+1 dwmblocks") }, */
-	{ 0, 			XF86XK_AudioRaiseVolume,   spawn, 	SHCMD("pamixer -i 5 --allow-boost; ~/.nixdots/dwm/vol_update.sh") },
-	/* { 0, 			XF86XK_AudioRaiseVolume,   spawn, 	SHCMD("pamixer -i 5 --allow-boost; pkill -RTMIN+1 dwmblocks") }, */
-	{ 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; ~/.nixdots/dwm/vol_update.sh" ) },
-	/* { 0, 			XF86XK_AudioMute,  	 spawn, 	SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
-	{ 0, 			XF86XK_AudioMicMute,  	 spawn, 	SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
-	/* Lenovo ThinkBook extra buttons, remapped via udev hwdb to F13/F14/F15. */
-	{ 0, 			XF86XK_Launch5,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XF86XK_Launch6,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
-	/* { 0, 			XF86XK_Tools,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
-	{ 0, 			XK_Help,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
-	/* Standard global media keys */
-	{ 0, 			XF86XK_AudioPlay,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XF86XK_AudioNext,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XF86XK_AudioPrev,  	 spawn, 	SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
-	{ 0, 			XK_Print,  	 spawn, 	SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
-	{ SUPKEY|ControlMask,             XK_0,      spawn,          SHCMD("picom-trans -c -o 100") },
-	{ SUPKEY|ControlMask,             XK_minus,      spawn,          SHCMD("picom-trans -c -10") },
-	{ SUPKEY|ControlMask,             XK_equal,      spawn,          SHCMD("picom-trans -c +10") },
-	{ SUPKEY|ShiftMask,             XK_m,      spawn,          SHCMD("iblind -w 1024 -h 512 -x 1920 -y 1080 -z 2 -c 9c9c9c -p") },
-	TAGKEYS(                        XK_F1,                      0)
-	TAGKEYS(                        XK_F2,                      1)
-	TAGKEYS(                        XK_F3,                      2)
-	TAGKEYS(                        XK_F4,                      3)
-	TAGKEYS(                        XK_F5,                      4)
-	TAGKEYS(                        XK_F6,                      5)
-	TAGKEYS(                        XK_F7,                      6)
-	TAGKEYS(                        XK_F8,                      7)
-	TAGKEYS(                        XK_F9,                      8)
-	{ MODKEY|ShiftMask,             XK_r,      quit,           {0} },
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {1} },
+    /* modifier                     key        function        argument */
+    { SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+    { SUPKEY,                       XK_b,      togglebarandupdate, {0} },
+    { SUPKEY|ShiftMask,             XK_b,      spawn,          SHCMD("kill $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null; ~/.nixdots/dwm/status.sh &") },
+    { SUPKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
+    { MODKEY,                       XK_Tab,    focusstackvis,  {.i = +1 } },
+    { SUPKEY,                       XK_k,      focusstackvis,  {.i = -1 } },
+    { MODKEY|ShiftMask,             XK_Tab,    focusstackvis,  {.i = -1 } },
+    { SUPKEY|ShiftMask,             XK_j,      focusstackhid,  {.i = +1 } },
+    { SUPKEY|ShiftMask,             XK_k,      focusstackhid,  {.i = -1 } },
+    { SUPKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+    { SUPKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+    { SUPKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+    { SUPKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+    { SUPKEY|ControlMask,           XK_j,      movestack,      {.i = +1 } },
+    { SUPKEY|ControlMask,           XK_k,      movestack,      {.i = -1 } },
+    { SUPKEY,                       XK_Return, zoom,           {0} },
+    { SUPKEY,                       XK_Tab,    view,           {0} },
+    { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+    { SUPKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+    { SUPKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+    { SUPKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+    { SUPKEY,                       XK_r,      setlayout,      {.v = &layouts[3]} },
+    { SUPKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[4]} },
+    { SUPKEY,                       XK_space,  setlayout,      {0} },
+    { SUPKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+    { SUPKEY,                       XK_0,      view,           {.ui = ~0 } },
+    { SUPKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+    { SUPKEY,                       XK_comma,  focusmon,       {.i = -1 } },
+    { SUPKEY,                       XK_period, focusmon,       {.i = +1 } },
+    { SUPKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+    { SUPKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+    { SUPKEY,                       XK_s,      show,           {0} },
+    { SUPKEY|ShiftMask,             XK_s,      showall,        {0} },
+    { SUPKEY|ControlMask,           XK_s,      togglesticky,   {0} },
+    { SUPKEY|ShiftMask,             XK_h,      hide,           {0} },
+    { SUPKEY|ShiftMask,             XK_l,      spawn,          SHCMD("slock & sleep 1; xset dpms force off") },
+    { SUPKEY|ControlMask|ShiftMask, XK_l,      spawn,          SHCMD("slock & systemctl suspend") },
+    { 0,			XF86XK_MonBrightnessUp,    spawn,          {.v = brupcmd}},
+    { 0,			XF86XK_MonBrightnessDown,    spawn,          {.v = brdncmd}},
+    { 0,            XF86XK_AudioLowerVolume,   spawn,   SHCMD("pamixer -d 5 --allow-boost; ~/.nixdots/dwm/vol_update.sh") },
+    /* { 0,             XF86XK_AudioLowerVolume,   spawn,   SHCMD("pamixer -d 5 --allow-boost; pkill -RTMIN+1 dwmblocks") }, */
+    { 0,            XF86XK_AudioRaiseVolume,   spawn,   SHCMD("pamixer -i 5 --allow-boost; ~/.nixdots/dwm/vol_update.sh") },
+    /* { 0,             XF86XK_AudioRaiseVolume,   spawn,   SHCMD("pamixer -i 5 --allow-boost; pkill -RTMIN+1 dwmblocks") }, */
+    { 0,            XF86XK_AudioMute,    spawn,     SHCMD("pamixer --toggle-mute; ~/.nixdots/dwm/vol_update.sh" ) },
+    /* { 0,             XF86XK_AudioMute,    spawn,     SHCMD("pamixer --toggle-mute; pkill -RTMIN+1 dwmblocks" ) }, */
+    { 0,            XF86XK_AudioMicMute,     spawn,     SHCMD("pactl set-source-mute @DEFAULT_SOURCE@ toggle; ~/.nixdots/dwm/vol_update.sh" ) },
+    /* Lenovo ThinkBook extra buttons, remapped via udev hwdb to F13/F14/F15. */
+    { 0,            XF86XK_Launch5,      spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
+    { 0,            XF86XK_Launch6,      spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
+    /* { 0,             XF86XK_Tools,    spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) }, */
+    { 0,            XK_Help,     spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+    /* Standard global media keys */
+    { 0,            XF86XK_AudioPlay,    spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh play-pause; ~/.nixdots/dwm/mus_update.sh" ) },
+    { 0,            XF86XK_AudioNext,    spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh next; ~/.nixdots/dwm/mus_update.sh" ) },
+    { 0,            XF86XK_AudioPrev,    spawn,     SHCMD("~/.nixdots/dwm/playerctl_wrapper.sh previous; ~/.nixdots/dwm/mus_update.sh" ) },
+    { 0,            XK_Print,    spawn,     SHCMD("scrot -z -s -f -e 'xclip -selection clipboard -t image/png -i $f' ~/Pictures/screenshots/%Y-%m-%d-%H%M%S.png") },
+    { SUPKEY|ControlMask,             XK_0,      spawn,          SHCMD("picom-trans -c -o 100") },
+    { SUPKEY|ControlMask,             XK_minus,      spawn,          SHCMD("picom-trans -c -10") },
+    { SUPKEY|ControlMask,             XK_equal,      spawn,          SHCMD("picom-trans -c +10") },
+    { SUPKEY|ShiftMask,             XK_m,      spawn,          SHCMD("iblind -w 1024 -h 512 -x 1920 -y 1080 -z 2 -c 9c9c9c -p") },
+    TAGKEYS(                        XK_F1,                      0)
+    TAGKEYS(                        XK_F2,                      1)
+    TAGKEYS(                        XK_F3,                      2)
+    TAGKEYS(                        XK_F4,                      3)
+    TAGKEYS(                        XK_F5,                      4)
+    TAGKEYS(                        XK_F6,                      5)
+    TAGKEYS(                        XK_F7,                      6)
+    TAGKEYS(                        XK_F8,                      7)
+    TAGKEYS(                        XK_F9,                      8)
+    { MODKEY|ShiftMask,             XK_r,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_q,      quit,           {1} },
 };
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
-	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button1,        togglewin,      {0} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         SUPKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         SUPKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         SUPKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            SUPKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            SUPKEY,         Button3,        toggletag,      {0} },
+    /* click                event mask      button          function        argument */
+    { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+    { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+    { ClkWinTitle,          0,              Button1,        togglewin,      {0} },
+    { ClkWinTitle,          0,              Button2,        zoom,           {0} },
+    { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+    { ClkClientWin,         SUPKEY,         Button1,        movemouse,      {0} },
+    { ClkClientWin,         SUPKEY,         Button2,        togglefloating, {0} },
+    { ClkClientWin,         SUPKEY,         Button3,        resizemouse,    {0} },
+    { ClkTagBar,            0,              Button1,        view,           {0} },
+    { ClkTagBar,            0,              Button3,        toggleview,     {0} },
+    { ClkTagBar,            SUPKEY,         Button1,        tag,            {0} },
+    { ClkTagBar,            SUPKEY,         Button3,        toggletag,      {0} },
 };
