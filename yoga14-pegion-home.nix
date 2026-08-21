@@ -254,14 +254,15 @@ in
 
   home.packages = with pkgs; [
     tealdeer
-  file
+    file
     net-tools
-  inetutils
+	openssl
+    inetutils
     lsof
     kitty
     bc
     broot
-  skim
+    skim
     zoxide
     firefox
     fzf
@@ -304,15 +305,15 @@ in
     ]))
     qbittorrent
     nicotine-plus
-  gimp
+    gimp
     kdePackages.kdenlive
     audacity
     audacious
-  mpc
-  rmpc
-  cava
+    mpc
+    rmpc
+    cava
 
-  clang-tools
+    clang-tools
 
     xdotool
     dwmblocks
@@ -320,19 +321,19 @@ in
     playerctl
     xmodmap
 
-  alsa-utils
+    alsa-utils
 
-  usbutils
-  android-file-transfer
-  jmtpfs
-  libmtp
+    usbutils
+    android-file-transfer
+    jmtpfs
+    libmtp
 
     nerd-fonts.jetbrains-mono
 
-  dunst
-  libnotify
+    dunst
+    libnotify
 
-  nixfmt
+    nixfmt
   ];
 
   fonts.fontconfig.enable = true;
