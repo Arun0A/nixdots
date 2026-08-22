@@ -88,6 +88,10 @@ in
     "net.ipv6.conf.all.forwarding" = true;
   };
 
+  services.journald.extraConfig = ''
+	SystemMaxUse=500M
+  '';
+
   ################
   # Networking
   ################
