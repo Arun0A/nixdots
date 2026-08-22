@@ -69,6 +69,7 @@ static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
 static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
 static const char *fselcmd[] = {
     "kitty",
+    "--config", "/home/pegion/.config/kitty/fsel.toml",
     "--title", "fsel",
     "--class", "fsel",
     "-e", "fsel",
