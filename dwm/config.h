@@ -29,6 +29,7 @@ static const Rule rules[] = {
     /* class      instance    title       tags mask     isfloating   monitor */
     { "Gimp",     NULL,       NULL,       0,            1,           -1 },
     { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "fsel",     "fsel",     NULL,  	  0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -66,6 +67,13 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
 static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
+static const char *fselcmd[] = {
+    "kitty",
+    "--title", "fsel",
+    "--class", "fsel",
+    "-e", "fsel",
+    NULL
+};
 
 #include "movestack.c"
 
@@ -81,6 +89,7 @@ togglebarandupdate(const Arg *arg)
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     { SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { SUPKEY|ShiftMask,             XK_d,      spawn,          {.v = fselcmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { SUPKEY,                       XK_b,      togglebarandupdate, {0} },
     { SUPKEY|ShiftMask,             XK_b,      spawn,          SHCMD("kill $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null; ~/.nixdots/dwm/status.sh &") },
