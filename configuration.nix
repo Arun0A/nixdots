@@ -77,7 +77,7 @@ in
     };
   };
 
-  boot.kernelModules = [ "coretemp" "v4l2loopback" ];
+  boot.kernelModules = [ "coretemp" "v4l2loopback" "uvcvideo" ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
