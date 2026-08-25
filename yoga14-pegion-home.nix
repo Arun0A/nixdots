@@ -276,7 +276,6 @@ in
     blueman
     curl
     feh
-	fsel
     tmux
     scrot
     kdePackages.dolphin
