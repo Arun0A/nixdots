@@ -309,6 +309,13 @@ in
   };
 
   ################
+  # FM / thunar
+  ################
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
+  programs.xfconf.enable = true;
+
+  ################
   # System packages
   ################
 

@@ -278,8 +278,9 @@ in
     feh
     tmux
     scrot
-    kdePackages.dolphin
-    kdePackages.kio-admin
+	thunar
+	thunar-archive-plugin
+	thunar-volman
     vivaldi
     google-chrome
     brave
@@ -608,7 +609,7 @@ in
   };
 
   ################
-  # xdg mimeApps
+  # xdg mimeapps
   ################
   # find $(echo $XDG_DATA_DIRS | tr ':' ' ') -path '*/applications/*.desktop' 2>/dev/null | sort
 
@@ -617,7 +618,7 @@ in
 
     defaultApplications = {
       # Directories
-      "inode/directory" = [ "org.kde.dolphin.desktop" ];
+      "inode/directory" = [ "thunar.desktop" ];
 
       # Browser
       "text/html" = [ "brave-browser.desktop" ];
