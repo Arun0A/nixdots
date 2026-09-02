@@ -10,11 +10,11 @@ static const int hidebarforalltags  = 1;        /* 1 toggles bar for all tags, 0
 
 /* static const char *fonts[]          = { "monospace:size=10" }; */
 static const char *fonts[] = {
-    "JetBrainsMonoNLNerdFont-Regular:size=10:antialias=true:autohint=true",
-    "JetBrainsMonoNLNerdFont-Regular:size=10:antialias=true:autohint=true"
+    "JetBrainsMonoNLNerdFont-Regular:size=9:antialias=true:autohint=true",
+    "JetBrainsMonoNLNerdFont-Regular:size=9:antialias=true:autohint=true"
 };
 /* static const char dmenufont[]       = "monospace:size=10"; */
-static const char dmenufont[]       = "JetBrainsMonoNLNerdFont-Regular:size=10";
+static const char dmenufont[]       = "JetBrainsMonoNLNerdFont-Regular:size=9";
 
 #include "walls/black_white_pastel-colors.h"
 
