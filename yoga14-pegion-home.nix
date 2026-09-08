@@ -284,6 +284,7 @@ in
     vivaldi
     google-chrome
     brave
+	librewolf
     zoom-us
     ffmpeg
     qtox
