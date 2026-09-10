@@ -258,6 +258,7 @@ in
     net-tools
 	openssl
     inetutils
+	rclone
     lsof
     kitty
     bc
