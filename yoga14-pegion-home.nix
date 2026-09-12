@@ -294,6 +294,7 @@ in
     antigravity-fhs
     thunderbird
     discord
+	mumble
     sioyek
     qrcp
     yazi
