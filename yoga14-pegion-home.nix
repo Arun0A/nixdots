@@ -285,7 +285,6 @@ in
     vivaldi
     google-chrome
     brave
-	librewolf
     zoom-us
     ffmpeg
     qtox
@@ -624,9 +623,9 @@ in
       "inode/directory" = [ "thunar.desktop" ];
 
       # Browser
-      "text/html" = [ "librewolf.desktop" ];
-      "x-scheme-handler/http" = [ "librewolf.desktop" ];
-      "x-scheme-handler/https" = [ "librewolf.desktop" ];
+      "text/html" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/http" = [ "brave-browser.desktop" ];
+      "x-scheme-handler/https" = [ "brave-browser.desktop" ];
 
       # Mail
       "x-scheme-handler/mailto" = [ "thunderbird.desktop" ];
