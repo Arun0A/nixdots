@@ -27,6 +27,19 @@ xmodmap -e "keycode 191 = Delete"
 redshift -O 5000
 ~/.nixdots/dwm/status.sh &
 
+# Initialize GNOME Keyring for NixOS + dwm
+if [ -x /run/wrappers/bin/gnome-keyring-daemon ]; then
+    eval $(/run/wrappers/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+    export GNOME_KEYRING_CONTROL
+    export GNOME_KEYRING_PID
+    export SSH_AUTH_SOCK
+fi
+
+# Ensure D-Bus is aware of the keyring variables
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment --systemd GNOME_KEYRING_CONTROL GNOME_KEYRING_PID SSH_AUTH_SOCK
+fi
+
 # exec dwm
 while true; do
     # dwm 2> ~/.dwm.log

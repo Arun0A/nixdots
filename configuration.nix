@@ -139,6 +139,16 @@ in
   boot.initrd.systemd.network.wait-online.enable = false;
 
   ################
+  # Keyring
+  ################
+
+  # Enable the Gnome Keyring daemon
+  services.gnome.gnome-keyring.enable = true;
+
+  # Ensure security wrappers allow PAM to unlock it on login
+  security.pam.services.login.enableGnomeKeyring = true;
+
+  ################
   # fmd-server
   ################
   # environment.etc."fmd-server/config.yml".text = ''
@@ -375,6 +385,7 @@ in
     lutris
     bottles
 
+	libsecret
 	gnome-network-displays
 	xdg-utils
   ];
