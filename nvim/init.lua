@@ -20,7 +20,7 @@ vim.o.timeoutlen = 300
 vim.o.signcolumn = 'yes'
 vim.o.winborder = 'rounded'
 vim.opt.shortmess:append "I"
-vim.cmd.colorscheme('retrobox')
+-- vim.cmd.colorscheme('retrobox')
 
 -- Space as leader key
 vim.g.mapleader = vim.keycode('<Space>')
@@ -203,6 +203,17 @@ vim.g.ts_enable = {
   auto_install = true,
   highlights = true,
 }
+
+require("tokyonight").setup({
+  style = "night",
+  transparent = true,
+  styles = {
+    sidebars = "transparent",
+    floats = "transparent",
+  },
+})
+
+vim.cmd("colorscheme tokyonight")
 
 -- LSP setup
 vim.api.nvim_create_autocmd('LspAttach', {
