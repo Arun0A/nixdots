@@ -548,7 +548,7 @@ in
 		i = "pageup";
 		m = "pagedown";
 
-		"[" = "backspace";
+		";" = "backspace";
 		n = "delete";
       };
     };
