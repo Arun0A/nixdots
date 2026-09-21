@@ -1,0 +1,19 @@
+[[mgr.append_keymap]]
+on  = [ "c", "b" ]
+run = "shell -- blobdrop %s"
+desc = "blobdrop"
+
+[[mgr.append_keymap]]
+on  = [ "c", "w" ]
+run = "shell -- feh --no-fehbg --bg-fill %s"
+desc = "Change Wallpaper"
+
+[[mgr.prepend_keymap]]
+on = "q"
+run = "quit --no-cwd-file"
+desc = "Quit without changing directory"
+
+[[mgr.prepend_keymap]]
+on = "<C-g>"
+run = "quit"
+desc = "Quit and cd here"

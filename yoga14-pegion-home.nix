@@ -465,6 +465,11 @@ in
   home.file.".config/dunst".source = ./dunst;
 
   ################
+  # yazi
+  ################
+  home.file.".config/yazi".source = ./yazi;
+
+  ################
   # rmpc
   ################
   home.file.".config/rmpc".source = ./rmpc;
