@@ -4,8 +4,6 @@ let
     ll = "ls -latr";
     l = "ls -lhtr";
 
-    yy = "tmux new-window -n yazi yazi";
-
     ".." = "cd ..";
 
     "nrs" = "sudo nixos-rebuild switch --flake /home/pegion/.nixdots/#yoga14";
@@ -72,13 +70,19 @@ in
       fi
   }
 
-  cdy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-    yazi "$@" --cwd-file="$tmp"
-    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-      builtin cd -- "$cwd"
-    fi
-    rm -f -- "$tmp"
+  yy() {
+      local tmp cwd
+      tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+
+      command yazi "$@" --cwd-file="$tmp"
+
+      cwd="$(cat -- "$tmp")"
+
+      if [ -d "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+      fi
+
+      command rm -f -- "$tmp"
   }
 
   term-cut() {
