@@ -2,10 +2,6 @@
 -- ==                           EDITOR SETTINGS                            == --
 -- ========================================================================== --
 
--- Learn more about Neovim lua api
--- https://neovim.io/doc/user/lua-guide.html
--- https://vonheikemen.github.io/devlog/tools/build-your-first-lua-config-for-neovim/
-
 vim.o.number = true
 vim.opt.relativenumber = true
 vim.o.ignorecase = true
@@ -20,6 +16,7 @@ vim.o.timeoutlen = 300
 vim.o.signcolumn = 'yes'
 vim.o.winborder = 'rounded'
 vim.opt.shortmess:append "I"
+vim.opt.colorcolumn = "80,120"
 -- vim.cmd.colorscheme('retrobox')
 
 -- Space as leader key
@@ -211,6 +208,9 @@ require("tokyonight").setup({
     sidebars = "transparent",
     floats = "transparent",
   },
+  on_highlights = function(hl, c)
+      hl.ColorColumn = { bg = "#0a0a0a" }
+  end,
 })
 
 vim.cmd("colorscheme tokyonight")
