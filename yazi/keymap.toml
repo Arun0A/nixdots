@@ -17,3 +17,37 @@ desc = "Quit without changing directory"
 on = "<C-g>"
 run = "quit"
 desc = "Quit and cd here"
+
+
+[[mgr.prepend_keymap]]
+on = ["1"]
+run = "plugin rel-motions --args=1"
+[[mgr.prepend_keymap]]
+on = ["2"]
+run = "plugin rel-motions --args=2"
+[[mgr.prepend_keymap]]
+on = ["3"]
+run = "plugin rel-motions --args=3"
+[[mgr.prepend_keymap]]
+on = ["4"]
+run = "plugin rel-motions --args=4"
+[[mgr.prepend_keymap]]
+on = ["5"]
+run = "plugin rel-motions --args=5"
+[[mgr.prepend_keymap]]
+on = ["6"]
+run = "plugin rel-motions --args=6"
+[[mgr.prepend_keymap]]
+on = ["7"]
+run = "plugin rel-motions --args=7"
+[[mgr.prepend_keymap]]
+on = ["8"]
+run = "plugin rel-motions --args=8"
+[[mgr.prepend_keymap]]
+on = ["9"]
+run = "plugin rel-motions --args=9"
+
+[[mgr.prepend_keymap]]
+on = ["i"]
+run = "plugin rel-motions"
+desc = "Trigger a relative motion"
