@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   myaliases = {
     ll = "ls -latr";
@@ -294,7 +294,7 @@ in
     qtox
     localsend
     vscode.fhs
-    antigravity-fhs
+	inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-ide
     thunderbird
     discord
 	mumble
