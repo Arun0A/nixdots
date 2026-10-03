@@ -620,6 +620,20 @@ in
   };
 
   ################
+  # termFileChooser
+  ################
+  xdg.configFile."xdg-desktop-portal-termfilechooser/config".text = ''
+    [filechooser]
+    cmd=${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+    default_dir=$HOME
+    env=TERMCMD='kitty --class filechooser --title filechooser'
+    env=PATH="$PATH:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin:/etc/profiles/per-user/${config.home.username}/bin"
+    create_help_file=1
+    open_mode=default
+    save_mode=suggested
+  '';
+
+  ################
   # xdg mimeapps
   ################
   # find $(echo $XDG_DATA_DIRS | tr ':' ' ') -path '*/applications/*.desktop' 2>/dev/null | sort

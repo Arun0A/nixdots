@@ -121,10 +121,13 @@ in
       enable = true;
 	  config = {
 	    common.default = [ "gtk" ];
+		common."org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
 	  };
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      extraPortals = with pkgs; [ xdg-desktop-portal-gtk xdg-desktop-portal-termfilechooser ];
     };
   };
+
+  environment.sessionVariables.GTK_USE_PORTAL = "1";
 
   programs.dconf.enable = true;
 
