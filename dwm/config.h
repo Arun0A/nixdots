@@ -69,6 +69,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *brupcmd[]  = { "brightnessctl", "set", "5%+", NULL};
 static const char *brdncmd[]  = { "brightnessctl", "set", "5%-", NULL};
+static const char *yazifmg[]  = { "kitty", "--class", "yazifmg", "-e", "yazi", NULL};
 
 #include "movestack.c"
 
@@ -85,6 +86,7 @@ static const Key keys[] = {
     /* modifier                     key        function        argument */
     { SUPKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+    { SUPKEY,                       XK_e, 	   spawn,          {.v = yazifmg } },
     { SUPKEY,                       XK_b,      togglebarandupdate, {0} },
     { SUPKEY|ShiftMask,             XK_b,      spawn,          SHCMD("kill $(cat /tmp/status.pid 2>/dev/null) 2>/dev/null; ~/.nixdots/dwm/status.sh &") },
     { SUPKEY,                       XK_j,      focusstackvis,  {.i = +1 } },
