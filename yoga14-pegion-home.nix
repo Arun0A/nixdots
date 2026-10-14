@@ -298,6 +298,7 @@ in
     thunderbird
     discord
 	mumble
+	pidgin
     sioyek
     qrcp
     yazi
