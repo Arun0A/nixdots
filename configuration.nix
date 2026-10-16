@@ -110,6 +110,7 @@ in
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
+	checkReversePath = false;
     trustedInterfaces = [ "tailscale0" "virbr0" ];
     allowedUDPPorts = [ config.services.tailscale.port 7236 5353 ];
     allowedTCPPorts = [ 8443 7236 5353 ];
@@ -364,6 +365,7 @@ in
     droidcam
 
     cloudflare-warp
+	wireguard-tools
     evtest
 	keyd
 

@@ -65,12 +65,13 @@ while true; do
   # mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}') # shows used/total
   mem_used=$(free -h | awk '/^Mem:/ {print $3}')
 
-  # Network interface status (assuming you use wlan0 or enp*)
+  # Network interface status
   net=$(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1)
   ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1) | awk '{print $1}')
   net_status=${net:-"NoNet"}
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
   warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
+  pvpn_status=$(nmcli c | grep -q "ProtonVPN" && echo "^" || echo "")
 
   if /home/pegion/.nixdots/dwm/playerctl_wrapper.sh status 2>/dev/null | grep -q "^Playing$"; then
     mus=$(/home/pegion/.nixdots/dwm/playerctl_wrapper.sh metadata --format '{{title}} - {{artist}}' 2>/dev/null | sed 's/^ - //; s/ - $//')
@@ -95,11 +96,11 @@ while true; do
   mus=$(cat /tmp/status_mus 2>/dev/null || echo "")
 
   # Write the base status to /tmp/status_base
-  echo "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime" >/tmp/status_base
+  echo "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime" >/tmp/status_base
   if [ -n "$mus" ]; then
-    xsetroot -name "${mus} | $warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+    xsetroot -name "${mus} | $pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
   else
-    xsetroot -name "$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+    xsetroot -name "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
   fi
   sleep 30 &
   sleep_pid=$!

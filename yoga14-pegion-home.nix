@@ -260,6 +260,7 @@ in
     tealdeer
     file
     net-tools
+	proton-vpn-cli
 	openssl
     inetutils
 	rclone

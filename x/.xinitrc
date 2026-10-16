@@ -13,6 +13,7 @@ dbus-update-activation-environment --systemd \
     XDG_SESSION_TYPE \
     XDG_CURRENT_DESKTOP
 
+/nix/store/rl2iddhifkrfkfga32f21fmpcpimz4ly-polkit-gnome-0.105/libexec/polkit-gnome-authentication-agent-1 &
 pulseaudio --start &
 ~/.fehbg
 xset b off
