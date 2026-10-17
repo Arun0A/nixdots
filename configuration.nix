@@ -388,7 +388,6 @@ in
     mangohud
     protonup-qt
     lutris
-    bottles
 
 	libsecret
 	gnome-network-displays

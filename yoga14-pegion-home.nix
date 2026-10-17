@@ -343,6 +343,9 @@ in
     libnotify
 
     nixfmt
+	# (bottles.override {
+	#   removeWarningPopup = true;
+	# })
   ];
 
   fonts.fontconfig.enable = true;
