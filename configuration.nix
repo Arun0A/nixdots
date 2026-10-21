@@ -388,6 +388,7 @@ in
     mangohud
     protonup-qt
     lutris
+	vulkan-tools
 
 	libsecret
 	gnome-network-displays
@@ -518,10 +519,12 @@ in
   ################
 
   hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+  programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ]; 
 
   ################
   # Flatpak 
