@@ -556,6 +556,7 @@ in
 		m = "pagedown";
 
 		"[" = "backspace";
+		";" = "enter";
 		n = "delete";
       };
     };
