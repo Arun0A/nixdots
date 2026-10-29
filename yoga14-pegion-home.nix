@@ -70,7 +70,7 @@ in
       fi
   }
 
-  yy() {
+  jj() {
       local tmp cwd
       tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 
