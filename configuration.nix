@@ -541,6 +541,7 @@ in
   
     keyboards.default.settings = {
       main = {
+	    capslock = "leftctrl";
         rightalt = "layer(nav)";
       };
   
