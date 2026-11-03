@@ -412,92 +412,104 @@ in
     ];
   };
 
+#  ################
+#  # logiops
+#  ################
+#  # Create systemd service
+#  systemd.services.logiops = {
+#    description = "Logitech Configuration Daemon";
+#    wantedBy = [ "graphical.target" ];
+#    startLimitIntervalSec = 0;
+#    after = [ "graphical.target" ];
+#    serviceConfig = {
+#      Type = "simple";
+#      ExecStart = "${pkgs.logiops}/bin/logid";
+#      User = "root";
+#    };
+#  };
+#
+#  # Add a `udev` rule to restart `logiops` when the mouse is connected
+#  # https://github.com/PixlOne/logiops/issues/239#issuecomment-1044122412
+#  services.udev.extraRules = ''
+#    ACTION=="change", SUBSYSTEM=="power_supply", ATTRS{manufacturer}=="Logitech", ATTRS{model_name}=="MX Anywhere 3S", RUN{program}="${pkgs.systemd}/bin/systemctl --no-block try-restart logiops.service"
+#  '';
+#
+#  # Configuration for logiops
+#  environment.etc."logid.cfg".text = ''
+#    devices: ({
+#      name: "MX Anywhere 3S";
+#
+#      smartshift: {
+#        on: true;
+#        threshold: 255;
+#      };
+#
+#      hiresscroll: {
+#        hires: true;
+#        invert: false;
+#        target: false;
+#        multiplier: 1.5;
+#      };
+#
+#      dpi: 1200;
+#
+#      buttons: (
+#
+#        {
+#          cid: 0x53; # BTN_SIDE (side_back)
+#          action = {
+#            type: "Keypress";
+#            keys: ["KEY_LEFTMETA"];
+#          };
+#        },
+#
+#        {
+#          cid: 0x56; # BTN_EXTRA (side_front)
+#          action = {
+#            type: "Keypress";
+#            keys: ["KEY_SYSRQ"];
+#          };
+#        },
+#
+#        {
+#          cid: 0xc4; # BTN_TOP (top_button)
+#          action = {
+#            type: "Keypress";
+#            keys: ["KEY_DELETE"];
+#          };
+#        }
+#
+#        # {
+#        #   cid: 0xd7;
+#        #   action = {
+#        #     type: "Keypress";
+#        #     keys: [""];
+#        #   };
+#        # },
+#
+#        # {
+#        #   cid: 0x52; # BTN_MIDDLE
+#        #   action = {
+#        #     type: "Keypress";
+#        #     keys: [""];
+#        #   };
+#        # }
+#
+#      );
+#    });
+#  '';
+
   ################
-  # logiops
+  # Solaar
   ################
-  # Create systemd service
-  systemd.services.logiops = {
-    description = "Logitech Configuration Daemon";
-    wantedBy = [ "graphical.target" ];
-    startLimitIntervalSec = 0;
-    after = [ "graphical.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.logiops}/bin/logid";
-      User = "root";
-    };
+  services.solaar = {
+    enable = true; # Enable the service
+    #package = pkgs.solaar; # Only set this option if you want to override the package from this flake!
+    window = "hide"; # Show the window on startup (show, *hide*, only [window only])
+    batteryIcons = "regular"; # Which battery icons to use (*regular*, symbolic, solaar)
+    extraArgs = ""; # Extra arguments to pass to solaar on startup
   };
-
-  # Add a `udev` rule to restart `logiops` when the mouse is connected
-  # https://github.com/PixlOne/logiops/issues/239#issuecomment-1044122412
-  services.udev.extraRules = ''
-    ACTION=="change", SUBSYSTEM=="power_supply", ATTRS{manufacturer}=="Logitech", ATTRS{model_name}=="MX Anywhere 3S", RUN{program}="${pkgs.systemd}/bin/systemctl --no-block try-restart logiops.service"
-  '';
-
-  # Configuration for logiops
-  environment.etc."logid.cfg".text = ''
-    devices: ({
-      name: "MX Anywhere 3S";
-
-      smartshift: {
-        on: true;
-        threshold: 255;
-      };
-
-      hiresscroll: {
-        hires: true;
-        invert: false;
-        target: false;
-        multiplier: 1.5;
-      };
-
-      dpi: 1200;
-
-      buttons: (
-
-        {
-          cid: 0x53; # BTN_SIDE (side_back)
-          action = {
-            type: "Keypress";
-            keys: ["KEY_LEFTMETA"];
-          };
-        },
-
-        {
-          cid: 0x56; # BTN_EXTRA (side_front)
-          action = {
-            type: "Keypress";
-            keys: ["KEY_SYSRQ"];
-          };
-        },
-
-        {
-          cid: 0xc4; # BTN_TOP (top_button)
-          action = {
-            type: "Keypress";
-            keys: ["KEY_DELETE"];
-          };
-        }
-
-        # {
-        #   cid: 0xd7;
-        #   action = {
-        #     type: "Keypress";
-        #     keys: [""];
-        #   };
-        # },
-
-        # {
-        #   cid: 0x52; # BTN_MIDDLE
-        #   action = {
-        #     type: "Keypress";
-        #     keys: [""];
-        #   };
-        # }
-
-      );
-    });
-  '';
+  hardware.logitech.wireless.enable = true;
 
   ################
   # Nix settings

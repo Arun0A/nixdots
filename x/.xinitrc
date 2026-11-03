@@ -21,6 +21,7 @@ picom -b --backend glx &
 # blueman-applet &
 copyq &
 touchegg &
+solaar --window=hide &
 dunst &
 xinput set-prop "ELAN06FA:00 04F3:31BE Touchpad" 347 45 & # Elan Trackpad Scrolling Distance
 xinput set-prop "Logitech MX Anywhere 3S" 349 0 & # Disable MXA3S High-Res Scroll
