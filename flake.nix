@@ -19,6 +19,10 @@
       url = "https://flakehub.com/f/Svenum/Solaar-Flake/*.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+	nixpkgs-opencode = {
+	  url = "github:NixOS/nixpkgs/31ecbaca1bdefa45dffc409f0250bd8039ea0010";
+	};
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, solaar, ... }:

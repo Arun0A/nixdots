@@ -1,6 +1,9 @@
 { config, pkgs, inputs, ... }:
 let
   pkgsUnstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
+  pkgsOpenCode = inputs.nixpkgs-opencode.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
   myaliases = {
     ll = "ls -latr";
     l = "ls -lhtr";
@@ -348,7 +351,7 @@ in
 	#   removeWarningPopup = true;
 	# })
   ]) ++ [
-    pkgsUnstable.opencode
+    pkgsOpenCode.opencode
 ];
 
   fonts.fontconfig.enable = true;
