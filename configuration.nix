@@ -539,6 +539,18 @@ in
   programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ]; 
 
   ################
+  # Local LLM
+  ################
+
+  services.ollama = {
+    enable = true;
+    package = pkgsUnstable.ollama-vulkan;
+
+    host = "127.0.0.1";
+    port = 11434;
+  };
+
+  ################
   # Flatpak 
   ################
 

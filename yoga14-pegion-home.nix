@@ -1,5 +1,6 @@
 { config, pkgs, inputs, ... }:
 let
+  pkgsUnstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   myaliases = {
     ll = "ls -latr";
     l = "ls -lhtr";
@@ -256,7 +257,7 @@ in
   # Packages
   ################
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     tealdeer
     file
     net-tools
@@ -295,7 +296,7 @@ in
     qtox
     localsend
     vscode.fhs
-	inputs.antigravity-nix.packages.${pkgs.system}.google-antigravity-ide
+	inputs.antigravity-nix.packages.${pkgs.stdenv.hostPlatform.system}.google-antigravity-ide
     thunderbird
     discord
 	mumble
@@ -346,7 +347,9 @@ in
 	# (bottles.override {
 	#   removeWarningPopup = true;
 	# })
-  ];
+  ]) ++ [
+    pkgsUnstable.opencode
+];
 
   fonts.fontconfig.enable = true;
 
