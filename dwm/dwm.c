@@ -169,6 +169,8 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
+static int drawstatusbar(Monitor *m, int bh, char* text);
+static int status2dtextlength(char* stext);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -252,7 +254,7 @@ static void zoom(const Arg *arg);
 
 /* variables */
 static const char broken[] = "broken";
-static char stext[256];
+static char stext[1024];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
@@ -284,6 +286,14 @@ static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
 static int restart = 0;
+
+#define STATUS2D_CACHE_SIZE 64
+static struct {
+	char name[16];
+	Clr clr;
+} clrcache[STATUS2D_CACHE_SIZE];
+static int clrcache_len = 0;
+static Clr statuscolors[3];
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -477,7 +487,7 @@ buttonpress(XEvent *e)
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
 		/* 2px right padding */
-		else if (ev->x > selmon->ww - TEXTW(stext) + lrpad - 2)
+		else if (ev->x > selmon->ww - status2dtextlength(stext))
 			click = ClkStatusText;
 		else {
 			x += TEXTW(selmon->ltsymbol);
@@ -539,6 +549,8 @@ cleanup(void)
 	for (i = 0; i < LENGTH(colors); i++)
 		drw_scm_free(drw, scheme[i], 3);
 	free(scheme);
+	for (i = 0; i < clrcache_len; i++)
+		drw_clr_free(drw, &clrcache[i].clr);
 	XDestroyWindow(dpy, wmcheckwin);
 	drw_free(drw);
 	XSync(dpy, False);
@@ -762,6 +774,236 @@ dirtomon(int dir)
 	return m;
 }
 
+static int
+getcolor(const char *colstr, Clr *dest)
+{
+	int i;
+
+	if (!drw || !colstr || !*colstr)
+		return 0;
+
+	for (i = 0; i < clrcache_len; i++) {
+		if (!strcasecmp(clrcache[i].name, colstr)) {
+			*dest = clrcache[i].clr;
+			return 1;
+		}
+	}
+
+	if (clrcache_len < STATUS2D_CACHE_SIZE) {
+		if (XftColorAllocName(drw->dpy, DefaultVisual(drw->dpy, drw->screen),
+		                      DefaultColormap(drw->dpy, drw->screen),
+		                      colstr, &clrcache[clrcache_len].clr)) {
+			strncpy(clrcache[clrcache_len].name, colstr, sizeof(clrcache[clrcache_len].name) - 1);
+			clrcache[clrcache_len].name[sizeof(clrcache[clrcache_len].name) - 1] = '\0';
+			*dest = clrcache[clrcache_len].clr;
+			clrcache_len++;
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+static int
+isstatus2dcmd(const char *s, const char **end)
+{
+	const char *p;
+
+	if (*s != '^')
+		return 0;
+	p = strchr(s + 1, '^');
+	if (!p)
+		return 0;
+	if (s[1] == 'c' || s[1] == 'b') {
+		if (p - s <= 16 && !memchr(s + 1, ' ', p - s - 1)) {
+			*end = p;
+			return 1;
+		}
+		return 0;
+	}
+	if (s[1] == 'r' && (s[2] == '-' || s[2] == '+' || (s[2] >= '0' && s[2] <= '9'))) {
+		*end = p;
+		return 1;
+	}
+	if ((s[1] == 'd' || s[1] == 'w' || s[1] == 'v' || s[1] == 't') && p == s + 2) {
+		*end = p;
+		return 1;
+	}
+	if (s[1] == 'f' && (s[2] == '-' || s[2] == '+' || (s[2] >= '0' && s[2] <= '9'))) {
+		*end = p;
+		return 1;
+	}
+	return 0;
+}
+
+int
+status2dtextlength(char *stext)
+{
+	int w = 0;
+	char *text, *s;
+	const char *end;
+	char *orig;
+
+	if (!stext || !*stext)
+		return 0;
+
+	orig = s = text = strdup(stext);
+	if (!orig)
+		return 0;
+
+	while (*text) {
+		if (*text == '^' && isstatus2dcmd(text, &end)) {
+			*text = '\0';
+			if (*s)
+				w += drw_fontset_getwidth(drw, s);
+			if (text[1] == 'f')
+				w += atoi(text + 2);
+			text = (char *)end + 1;
+			s = text;
+		} else {
+			text++;
+		}
+	}
+	if (*s)
+		w += drw_fontset_getwidth(drw, s);
+
+	free(orig);
+	return w + 2; /* 2px padding */
+}
+
+int
+drawstatusbar(Monitor *m, int bh, char *stext)
+{
+	int ret, w, x;
+	char *text, *s;
+	const char *end;
+	char *orig;
+	Clr oldfg, oldbg;
+
+	if (!stext || !*stext)
+		return m->ww;
+
+	w = status2dtextlength(stext);
+	ret = x = m->ww - w;
+
+	drw_setscheme(drw, statuscolors);
+	statuscolors[ColFg] = scheme[SchemeNorm][ColFg];
+	statuscolors[ColBg] = scheme[SchemeNorm][ColBg];
+	statuscolors[ColBorder] = scheme[SchemeNorm][ColBorder];
+	oldfg = statuscolors[ColFg];
+	oldbg = statuscolors[ColBg];
+
+	/* fill background of status bar */
+	drw_rect(drw, x, 0, w, bh, 1, 1);
+	x++;
+
+	orig = s = text = strdup(stext);
+	if (!orig)
+		return ret;
+
+	while (*text) {
+		if (*text == '^' && isstatus2dcmd(text, &end)) {
+			*text = '\0';
+			if (*s) {
+				w = drw_fontset_getwidth(drw, s);
+				if (w > 0) {
+					drw_text(drw, x, 0, w, bh, 0, s, 0);
+					x += w;
+				}
+			}
+
+			/* execute command(s) between text and end */
+			char *cmd = text + 1;
+			while (cmd < end) {
+				if (*cmd == 'c' || *cmd == 'b') {
+					char isbg = (*cmd == 'b');
+					char buf[16];
+					int len = 0;
+					cmd++;
+					if (*cmd == '-') {
+						if (isbg)
+							statuscolors[ColBg] = scheme[SchemeNorm][ColBg];
+						else
+							statuscolors[ColFg] = scheme[SchemeNorm][ColFg];
+						cmd++;
+					} else if (*cmd == '#') {
+						len = (cmd + 7 <= end) ? 7 : (int)(end - cmd);
+						memcpy(buf, cmd, len);
+						buf[len] = '\0';
+						getcolor(buf, isbg ? &statuscolors[ColBg] : &statuscolors[ColFg]);
+						cmd += len;
+					} else {
+						while (cmd + len < end && cmd[len] != '^' && len < (int)(sizeof(buf) - 1))
+							len++;
+						memcpy(buf, cmd, len);
+						buf[len] = '\0';
+						getcolor(buf, isbg ? &statuscolors[ColBg] : &statuscolors[ColFg]);
+						cmd += len;
+					}
+				} else if (*cmd == 'd') {
+					statuscolors[ColFg] = scheme[SchemeNorm][ColFg];
+					statuscolors[ColBg] = scheme[SchemeNorm][ColBg];
+					cmd++;
+				} else if (*cmd == 'w') {
+					Clr swp = statuscolors[ColFg];
+					statuscolors[ColFg] = statuscolors[ColBg];
+					statuscolors[ColBg] = swp;
+					cmd++;
+				} else if (*cmd == 'v') {
+					oldfg = statuscolors[ColFg];
+					oldbg = statuscolors[ColBg];
+					cmd++;
+				} else if (*cmd == 't') {
+					statuscolors[ColFg] = oldfg;
+					statuscolors[ColBg] = oldbg;
+					cmd++;
+				} else if (*cmd == 'r') {
+					cmd++;
+					int rx = atoi(cmd);
+					while (cmd < end && *cmd != ',') cmd++;
+					if (cmd < end) cmd++;
+					int ry = atoi(cmd);
+					while (cmd < end && *cmd != ',') cmd++;
+					if (cmd < end) cmd++;
+					int rw = atoi(cmd);
+					while (cmd < end && *cmd != ',') cmd++;
+					if (cmd < end) cmd++;
+					int rh = atoi(cmd);
+					while (cmd < end && *cmd != '^') cmd++;
+
+					if (ry < 0) ry = 0;
+					if (rx < 0) rx = 0;
+					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
+				} else if (*cmd == 'f') {
+					cmd++;
+					x += atoi(cmd);
+					while (cmd < end && *cmd != '^') cmd++;
+				} else {
+					cmd++;
+				}
+			}
+
+			text = (char *)end + 1;
+			s = text;
+		} else {
+			text++;
+		}
+	}
+
+	if (*s) {
+		w = drw_fontset_getwidth(drw, s);
+		if (w > 0) {
+			drw_text(drw, x, 0, w, bh, 0, s, 0);
+			x += w;
+		}
+	}
+
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	free(orig);
+
+	return ret;
+}
+
 void
 drawbar(Monitor *m)
 {
@@ -776,9 +1018,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+		tw = m->ww - drawstatusbar(m, bh, stext);
 	}
 
 	for (c = m->clients; c; c = c->next) {

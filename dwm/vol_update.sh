@@ -11,4 +11,4 @@ echo "$volume" >/tmp/status_vol
 base=$(cat /tmp/status_base 2>/dev/null || echo "")
 
 # Set the full status with mic mark and volume, and keep base info
-xsetroot -name "${micmark}${volume} | $base"
+xsetroot -name "^c#7e8655^${micmark}${volume} ^c#404886^| $base"

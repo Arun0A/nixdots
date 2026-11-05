@@ -96,11 +96,11 @@ while true; do
   mus=$(cat /tmp/status_mus 2>/dev/null || echo "")
 
   # Write the base status to /tmp/status_base
-  echo "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime" >/tmp/status_base
+  echo "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime" >/tmp/status_base
   if [ -n "$mus" ]; then
-    xsetroot -name "${mus} | $pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+    xsetroot -name "${mus} | $pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime"
   else
-    xsetroot -name "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | $datetime"
+    xsetroot -name "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime"
   fi
   sleep 30 &
   sleep_pid=$!

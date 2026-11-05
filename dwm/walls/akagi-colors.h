@@ -1,4 +1,4 @@
-// color scheme for lain_prophecy.jpg
+// color scheme for akagi.jpg
 static const char col_selfg[]    = "#7e8655";
 static const char col_hidfg[]    = "#3c3f45";
 static const char col_norfg[]    = "#404886";
