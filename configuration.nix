@@ -551,6 +551,7 @@ in
 
 	environmentVariables = {
       OLLAMA_IGPU_ENABLE = "1";
+	  GODEBUG = "http2client=0";
     };
   };
 
