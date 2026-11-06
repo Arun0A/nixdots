@@ -230,6 +230,16 @@ in
   security.rtkit.enable = true;
 
   ################
+  # intel-gpu-tools
+  ################
+  security.wrappers.intel_gpu_top = {
+    source = "${pkgs.intel-gpu-tools}/bin/intel_gpu_top";
+    owner = "root";
+    group = "root";
+    capabilities = "cap_perfmon+ep";
+  };
+
+  ################
   # Time
   ################
 
@@ -389,6 +399,7 @@ in
     protonup-qt
     lutris
 	vulkan-tools
+	intel-gpu-tools
 
 	libsecret
 	gnome-network-displays
