@@ -60,6 +60,19 @@ while true; do
     fi
   fi
   echo "$cpu_idle_all $cpu_total" > /tmp/status_cpu_prev
+  
+  # GPU Render3D Usage
+  gpu_usage=$(intel_gpu_top -J -s 1000 -n 1 2>/dev/null | \
+    awk '
+      /"Render\/3D"[[:space:]]*:/ { in_render=1; next }
+      in_render && /"busy"[[:space:]]*:/ {
+        value=$0
+        sub(/^.*"busy"[[:space:]]*:[[:space:]]*/, "", value)
+        sub(/[,}].*$/, "", value)
+        if (value ~ /^[0-9]+([.][0-9]+)?$/) printf "%.0f\n", value
+        exit
+      }
+    ')
 
   # Memory usage
   # mem_used=$(free -h | awk '/^Mem:/ {print $3 "/" $2}') # shows used/total
@@ -96,11 +109,11 @@ while true; do
   mus=$(cat /tmp/status_mus 2>/dev/null || echo "")
 
   # Write the base status to /tmp/status_base
-  echo "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime" >/tmp/status_base
+  echo "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4}+${gpu_usage} | $battery | ^c#7e8655^$datetime" >/tmp/status_base
   if [ -n "$mus" ]; then
-    xsetroot -name "${mus} | $pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime"
+    xsetroot -name "${mus} | $pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4}+${gpu_usage} | $battery | ^c#7e8655^$datetime"
   else
-    xsetroot -name "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4} | $battery | ^c#7e8655^$datetime"
+    xsetroot -name "$pvpn_status$warp_status$ssid $ip | $mem_used | ${cpu_usage::-1}${cpu_temp:0:-4}+${gpu_usage} | $battery | ^c#7e8655^$datetime"
   fi
   sleep 30 &
   sleep_pid=$!
