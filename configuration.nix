@@ -542,17 +542,50 @@ in
   # Local LLM
   ################
 
-  services.ollama = {
-    enable = true;
-    package = pkgsUnstable.ollama-vulkan;
+  # services.ollama = {
+  #   enable = true;
+  #   package = pkgsUnstable.ollama-vulkan;
 
-    host = "127.0.0.1";
-    port = 11434;
+  #   host = "127.0.0.1";
+  #   port = 11434;
 
-	environmentVariables = {
-      OLLAMA_IGPU_ENABLE = "1";
-	  GODEBUG = "http2client=0";
+  #   environmentVariables = {
+  #     OLLAMA_IGPU_ENABLE = "1";
+  #     GODEBUG = "http2client=0";
+  #   };
+  # };
+
+  systemd.services.ollama = {
+    description = "Ollama Local LLM Service";
+  
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+  
+    serviceConfig = {
+      Type = "simple";
+      User = "ollama";
+      Group = "ollama";
+      SupplementaryGroups = [ "render" ];
+  
+      Environment = [
+        "HOME=/var/lib/ollama-data"
+        "OLLAMA_HOST=127.0.0.1:11434"
+        "OLLAMA_MODELS=/var/lib/ollama-data/models"
+        "OLLAMA_IGPU_ENABLE=1"
+        "GODEBUG=http2client=0"
+        "LD_LIBRARY_PATH=/nix/store/dqj57l1prad38vjrad4bs9d977i4q5zm-gcc-15.3.0-lib/lib"
+      ];
+  
+      ExecStart = "/opt/ollama/bin/ollama serve";
+  
+      Restart = "always";
+      RestartSec = 3;
+      KillSignal = "SIGTERM";
+      TimeoutStopSec = 30;
     };
+  
+    enable = true;
   };
 
   ################
