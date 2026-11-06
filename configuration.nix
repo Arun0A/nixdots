@@ -393,6 +393,11 @@ in
 	libsecret
 	gnome-network-displays
 	xdg-utils
+
+	(writeShellScriptBin "ollama" ''
+export LD_LIBRARY_PATH="/nix/store/dqj57l1prad38vjrad4bs9d977i4q5zm-gcc-15.3.0-lib/lib''${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+exec /opt/ollama/bin/ollama "$@"
+'')
   ];
 
   environment.variables.EDITOR = "vim";
