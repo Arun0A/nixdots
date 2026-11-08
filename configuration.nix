@@ -346,6 +346,10 @@ in
   environment.systemPackages = with pkgs; [
     pkgs.home-manager
 
+	gcc
+	pkg-config
+	linuxHeaders
+
     wget
     git
     vim
