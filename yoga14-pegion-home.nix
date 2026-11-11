@@ -263,6 +263,7 @@ in
   home.packages = (with pkgs; [
     tealdeer
     file
+	unrar
     net-tools
 	proton-vpn-cli
 	openssl
