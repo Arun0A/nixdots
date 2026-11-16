@@ -10,6 +10,11 @@ in
   ];
 
   services.logind.settings.Login.HandlePowerKey = "suspend";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   # tty greeting
   services.getty.greetingLine = "\\e[1;36m<< If you are reading this, it is probably not your device. Return it to the \\e[1;31mOWNER : Arun Bhattacharya (arun0a_in@hotmail.com)\\e[1;36m >> \\e[0m";
