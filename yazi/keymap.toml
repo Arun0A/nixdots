@@ -18,6 +18,10 @@ on = "<C-g>"
 run = "quit"
 desc = "Quit and cd here"
 
+[[mgr.prepend_keymap]]
+on = ";"
+run = "shell --interactive --orphan"
+desc = "Run dedicated shell command"
 
 [[mgr.prepend_keymap]]
 on = ["1"]
