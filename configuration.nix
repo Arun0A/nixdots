@@ -7,6 +7,7 @@ in
   imports = [
     ./hardware-configuration.nix
 	./fprint55a2.nix
+	./warp-bypass.nix
   ];
 
   services.logind.settings.Login.HandlePowerKey = "suspend";
