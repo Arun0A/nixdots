@@ -83,7 +83,7 @@ while true; do
   ssid=$(nmcli c | grep $(ip link show | awk '/state UP/ {print $2}' | sed 's/://' | head -n 1) | awk '{print $1}')
   net_status=${net:-"NoNet"}
   ip=$(ip -4 addr show "$net" | awk '/inet / {print $2}' | cut -d/ -f1)
-  warp_status=$([[ -n "$(nmcli c | grep CloudflareWARP)" ]] && echo "*" || echo "")
+  warp_status=$([[ -n "$(nmcli c | grep -E 'CloudflareWARP|awg0')" ]] && echo "*" || echo "")
   pvpn_status=$(nmcli c | grep -q "ProtonVPN" && echo "^" || echo "")
 
   if /home/pegion/.nixdots/dwm/playerctl_wrapper.sh status 2>/dev/null | grep -q "^Playing$"; then
