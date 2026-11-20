@@ -5,8 +5,7 @@
 # Tunnel config lives in /etc/amnezia/amneziawg/awg0.conf (created by hand).
 
 {
-  # The official warp-cli daemon is blocked on campus and fights over routes/DNS.
-  services.cloudflare-warp.enable = lib.mkForce false;
+  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [ ];
 
   environment.systemPackages = [
     pkgs.amneziawg-tools
