@@ -83,7 +83,7 @@ in
     };
   };
 
-  boot.kernelModules = [ "coretemp" "v4l2loopback" "uvcvideo" ];
+  boot.kernelModules = [ "coretemp" "v4l2loopback" "uvcvideo" "hid-sony" "hid-playstation" ];
 
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
