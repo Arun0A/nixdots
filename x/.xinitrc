@@ -1,5 +1,6 @@
 export XDG_SESSION_TYPE=x11
 export XDG_CURRENT_DESKTOP=dwm
+export GTK_CSD=0
 
 systemctl --user import-environment \
     DISPLAY \
