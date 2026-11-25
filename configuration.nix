@@ -119,7 +119,7 @@ in
 	checkReversePath = false;
     trustedInterfaces = [ "tailscale0" "virbr0" ];
     allowedUDPPorts = [ config.services.tailscale.port 7236 5353 ];
-    allowedTCPPorts = [ 8443 7236 5353 1704 1705 ];
+    allowedTCPPorts = [ 8443 7236 5353 ];
   };
 
   # Enable XDG Desktop Portal for screensharing
