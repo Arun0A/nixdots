@@ -43,6 +43,8 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd GNOME_KEYRING_CONTROL GNOME_KEYRING_PID SSH_AUTH_SOCK
 fi
 
+xsetroot -cursor_name left_ptr
+
 # exec dwm
 while true; do
     # dwm 2> ~/.dwm.log
