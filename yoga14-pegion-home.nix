@@ -620,12 +620,14 @@ in
 
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
-    gtk-error-bell = 0;
+      gtk-error-bell = 0;
+	  gtk-cursor-theme-name = "Bibata-Modern-Classic";
     };
 
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
-    gtk-error-bell = 0;
+      gtk-error-bell = 0;
+	  gtk-cursor-theme-name = "Bibata-Modern-Classic";
     };
 
     gtk4.theme = config.gtk.theme;
